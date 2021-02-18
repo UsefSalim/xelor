@@ -31,26 +31,26 @@ exports.createServer = () => {
         }
       );
     });
-  fs.readFile(`${__dirname}/static/server.js`, 'utf-8', (err, data) => {
+  fs.readFile(`${__dirname}/../static/server.js`, 'utf-8', (err, data) => {
     if (err) throw err;
     fs.appendFile(`server.js`, data, (err) => {
       if (err) throw err;
     });
   });
   !fs.existsSync('.gitignore') &&
-    fs.readFile(`${__dirname}/../.gitignore`, 'utf-8', (err, data) => {
+    fs.readFile(`${__dirname}/../../.gitignore`, 'utf-8', (err, data) => {
       fs.appendFile(`${path}/.gitignore`, data, (err) => {
         if (err) throw err;
       });
     });
   // !fs.existsSync('README.md') &&
-  fs.readFile(`${__dirname}/../README.md`, 'utf-8', (err, data) => {
+  fs.readFile(`${__dirname}/../../README.md`, 'utf-8', (err, data) => {
     fs.appendFile(`${path}/go.README.md`, data, (err) => {
       if (err) throw err;
     });
   });
   fs.existsSync('package.json') &&
-    fs.readFile(`${__dirname}/static/package.json`, 'utf-8', (err, data) => {
+    fs.readFile(`${__dirname}/../static/package.json`, 'utf-8', (err, data) => {
       const jsonFile = JSON.parse(data);
       if (!err) {
         jsonFile.scripts.serverdep =
@@ -63,7 +63,7 @@ exports.createServer = () => {
       });
     });
   !fs.existsSync('package.json') &&
-    fs.readFile(`${__dirname}/static/package.json`, 'utf-8', (err, data) => {
+    fs.readFile(`${__dirname}/../static/package.json`, 'utf-8', (err, data) => {
       fs.appendFile(`${path}/package.json`, data, (err) => {
         if (err) throw err;
       });
