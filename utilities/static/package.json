@@ -3,7 +3,11 @@
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
-  "scripts": {},
+  "scripts": {
+    "serverdep": "npm i express dotenv body-parser cookie-parser mongoose",
+    "serverdevdep": "npm i nodemon morgan -D",
+    "dev": "nodemon server.js"
+  },
   "author": "",
   "license": "ISC",
   "dependencies": {},

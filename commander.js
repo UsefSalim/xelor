@@ -1,23 +1,17 @@
 #!/usr/bin/env node
 const program = require('commander');
 
+const { createServer } = require('./utilities/folders');
 
-createApp.ServerCreate("default");   /// verification create defaut au lancement node module 
 // create starter pack
-program
-  .version('1.0.0')
-  .description('express generator')
+program.version('1.0.0').description('express generator');
 
 program
   .command('make:server')
   .alias('ms')
   .description('starter project created succesfuly')
-  .action((modelName) => {
-    createApp.ServerCreate(modelName)
-  })
+  .action(() => {
+    createServer();
+  });
 
-
-
-
-
-program.parse(process.args)
+program.parse(process.args);
