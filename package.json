@@ -1,6 +1,6 @@
 {
-  "name": "darty",
-  "version": "1.0.0",
+  "name": "generatit",
+  "version": "1.0.1",
   "description": "",
   "main": "index.js",
   "preferGlobal": true,

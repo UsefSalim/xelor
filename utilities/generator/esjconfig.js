@@ -112,13 +112,11 @@ const staticRoute = require('./routes/static.routes')`);
             }
           );
         terminal('ejs template engine configured ');
-        terminal(
-          '(install express-ejs-layouts connect-flash express-session )> npm run ejs '
-        );
+        terminal('(install ejs config )> npm run ejs ');
         terminal('> npm run dev');
       } else {
         terminal(
-          "veiller configurer votre serverur avant d'utuliser ejs > go make:server"
+          "veiller configurer votre serverur avant d'utuliser ejs > generatit server"
         );
       }
     });
