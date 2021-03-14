@@ -3,6 +3,7 @@ require('dotenv').config({ path: './config/.env' });
 const express = require('express');
 const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
+const cors = require('cors');
 const mongoose = require('mongoose');
 
 const app = express();
@@ -11,6 +12,7 @@ const PORT = process.env.PORT || 5000;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
+app.use(cors());
 process.env.NODE_ENV === 'developpement' && app.use(morgan('tiny'));
 
 // Db Connexion

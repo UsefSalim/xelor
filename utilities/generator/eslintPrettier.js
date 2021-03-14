@@ -9,15 +9,15 @@ exports.configEslintPrettier = () => {
       fs.appendFile(
         `${path}/.vscode/go.settings.json`,
         `{
-        "editor.formatOnSave": true,
-        "editor.tabSize": 2,
-        "[javascript]": {
-          "editor.formatOnSave": false
-        },
-        "editor.codeActionsOnSave": {
-          "source.fixAll": true
-        }
-      }`,
+"editor.formatOnSave": true,
+"editor.tabSize": 2,
+"[javascript]": {
+"editor.formatOnSave": false
+},
+"editor.codeActionsOnSave": {
+  "source.fixAll": true
+}
+}`,
         (err) => {
           if (err) throw err;
         }
@@ -27,15 +27,15 @@ exports.configEslintPrettier = () => {
     fs.appendFile(
       `${path}/.vscode/go.settings.json`,
       `{
-        "editor.formatOnSave": true,
-        "editor.tabSize": 2,
-        "[javascript]": {
-          "editor.formatOnSave": false
-        },
-        "editor.codeActionsOnSave": {
-          "source.fixAll": true
-        }
-      }`,
+"editor.formatOnSave": true,
+"editor.tabSize": 2,
+"[javascript]": {
+  "editor.formatOnSave": false
+},
+"editor.codeActionsOnSave": {
+  "source.fixAll": true
+}
+}`,
       (err) => {
         if (err) throw err;
       }
@@ -44,14 +44,14 @@ exports.configEslintPrettier = () => {
   fs.appendFile(
     `${path}/.prettierrc`,
     `{
-      "printWidth": 80,
-      "tabWidth": 2,
-      "semi": true,
-      "singleQuote": true,
-      "trailingComma": "es5",
-      "bracketSpacing": true,
-      "jsxBracketSameLine": false
-    }`,
+"printWidth": 80,
+"tabWidth": 2,
+"semi": true,
+"singleQuote": true,
+"trailingComma": "es5",
+"bracketSpacing": true,
+"jsxBracketSameLine": false
+}`,
     (err) => {
       if (err) throw err;
     }
@@ -59,45 +59,46 @@ exports.configEslintPrettier = () => {
   fs.appendFile(
     `${path}/.eslintrc.json`,
     `{
-      "env": {
-        "browser": true,
-        "commonjs": true,
-        "es2021": true
-      },
-      "extends": ["airbnb-base", "prettier"],
-      "plugins": ["prettier"],
-      "parserOptions": {
-        "ecmaVersion": 12
-      },
-      "rules": {
-        "prettier/prettier": [
-          "error",
-          {
-            "endOfLine": "auto"
-          }
-        ],
-        "import/no-extraneous-dependencies": "off",
-        "import/prefer-default-export": "off",
-        "no-confusing-arrow": "off",
-        "linebreak-style": "off",
-        "no-unused-expressions": "off",
-        "no-use-before-define": "off",
-        "no-shadow": "off",
-        "arrow-parens": ["off"],
-        "comma-dangle": [
-          "error",
-          {
-            "arrays": "always-multiline",
-            "objects": "always-multiline",
-            "imports": "always-multiline",
-            "exports": "always-multiline",
-            "functions": "ignore"
-          }
-        ],
-        "no-plusplus": "off",
-        "complexity": ["error", 4],
-        "default-case": "error"
-      }
+"env": {
+  "browser": true,
+  "commonjs": true,
+  "es2021": true
+},
+"extends": ["airbnb-base", "prettier"],
+"plugins": ["prettier"],
+"parserOptions": {
+  "ecmaVersion": 12
+},
+"rules": {
+  "prettier/prettier": [
+    "error",
+    {
+      "endOfLine": "auto"
+    }
+  ],
+  "import/no-extraneous-dependencies": "off",
+  "import/prefer-default-export": "off",
+  "no-confusing-arrow": "off",
+  "linebreak-style": "off",
+  "no-unused-expressions": "off",
+  "no-use-before-define": "off",
+  "no-shadow": "off",
+  "arrow-parens": ["off"],
+  "comma-dangle": [
+    "error",
+    {
+      "arrays": "always-multiline",
+      "objects": "always-multiline",
+      "imports": "always-multiline",
+      "exports": "always-multiline",
+      "functions": "ignore"
+    }
+  ],
+  "no-plusplus": "off",
+  "complexity": ["error", 4],
+  "default-case": "error",
+  "import/no-unresolved" :"off"
+}
     }`,
     (err) => {
       if (err) throw err;
@@ -136,7 +137,5 @@ exports.configEslintPrettier = () => {
       });
     });
   terminal('eslint and prettier file added ');
-  terminal(
-    '(install prettier eslint eslint-config-prettier eslint-plugin-prettier eslint-plugin-import eslint-config-airbnb-base )> npm run eslint '
-  );
+  terminal('(install dependencies eslint and prettier )> npm run eslint ');
 };
