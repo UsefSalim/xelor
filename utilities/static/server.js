@@ -2,15 +2,14 @@ require('dotenv').config({ path: './config/.env' });
 // packages
 const express = require('express');
 const morgan = require('morgan');
-const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
 // Middleware
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 process.env.NODE_ENV === 'developpement' && app.use(morgan('tiny'));
 

@@ -50,13 +50,15 @@ exports.createServer = () => {
     });
   });
   fs.existsSync('package.json') &&
-    fs.readFile(`${__dirname}/../static/package.json`, 'utf-8', (err, data) => {
+    fs.readFile(`${path}/package.json`, 'utf-8', (err, data) => {
       const jsonFile = JSON.parse(data);
       if (!err) {
         jsonFile.scripts.serverdep =
-          'npm i express dotenv body-parser cookie-parser mongoose';
-        jsonFile.scripts.nodemon = 'npm i nodemon morgan -D';
-        jsonFile.scripts.dev = 'nodemon server.js';
+          'npm i express dotenv cookie-parser mongoose';
+        jsonFile.scripts.serverdevdep = 'npm i nodemon morgan -D';
+        jsonFile.scripts.dependencies =
+          'concurrently "npm run serverdep" "npm run serverdevdep"';
+        jsonFile.scripts.server = 'nodemon server.js';
       }
       fs.writeFile(`${path}/package.json`, JSON.stringify(jsonFile), (err) => {
         err && terminal('err', err);
@@ -69,9 +71,6 @@ exports.createServer = () => {
       });
     });
   terminal('server created succesfuly  ');
-  terminal(
-    '(install express dotenv body-parser cookie-parser mongoose )> npm run serverdep '
-  );
-  terminal('(install nodemon morgan)> npm run serverdevdep');
-  terminal('> npm run dev');
+  terminal('(install dependencies)> npm run dependencies ');
+  terminal('> npm run server');
 };

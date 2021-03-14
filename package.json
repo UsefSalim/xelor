@@ -13,7 +13,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "commander": "^7.1.0"
+    "commander": "^7.1.0",
+    "concurrently": "^6.0.0"
   },
   "devDependencies": {
     "eslint": "^7.20.0",

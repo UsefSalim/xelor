@@ -4,9 +4,10 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "serverdep": "npm i express dotenv body-parser cookie-parser mongoose",
+    "serverdep": "npm i express dotenv cookie-parser mongoose",
     "serverdevdep": "npm i nodemon morgan -D",
-    "dev": "nodemon server.js"
+    "dependencies": "concurrently \"npm run serverdep\" \"npm run serverdevdep\"",
+    "server": "nodemon server.js"
   },
   "author": "",
   "license": "ISC",
