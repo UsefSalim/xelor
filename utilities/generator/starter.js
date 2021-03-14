@@ -2,24 +2,18 @@ const fs = require('fs');
 
 const { log: terminal } = console;
 const path = process.cwd();
+const ifFolderExist = (Folder) => {
+  !fs.existsSync(`./${Folder}`) &&
+    fs.mkdir(`${path}/${Folder}`, (err) => {
+      if (err) throw err;
+    });
+};
 
 exports.createServer = () => {
-  !fs.existsSync('./controllers') &&
-    fs.mkdir(`${path}/controllers`, (err) => {
-      if (err) throw err;
-    });
-  !fs.existsSync('./models') &&
-    fs.mkdir(`${path}/models`, (err) => {
-      if (err) throw err;
-    });
-  !fs.existsSync('./routes') &&
-    fs.mkdir(`${path}/routes`, (err) => {
-      if (err) throw err;
-    });
-  !fs.existsSync('./validations') &&
-    fs.mkdir(`${path}/validations`, (err) => {
-      if (err) throw err;
-    });
+  ifFolderExist('controllers');
+  ifFolderExist('models');
+  ifFolderExist('routes');
+  ifFolderExist('validations');
   !fs.existsSync('./config') &&
     fs.mkdir(`${path}/config`, () => {
       fs.appendFile(
