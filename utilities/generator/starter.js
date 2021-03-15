@@ -56,7 +56,7 @@ exports.createServer = () => {
       const jsonFile = JSON.parse(data);
       if (!err) {
         jsonFile.scripts.serverdep =
-          'npm i express dotenv cors cookie-parser mongoose';
+          'npm i express dotenv joi cors cookie-parser mongoose';
         jsonFile.scripts.serverdevdep = 'npm i nodemon morgan -D';
         jsonFile.scripts.dependencies =
           'concurrently "npm run serverdep" "npm run serverdevdep"';

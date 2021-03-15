@@ -7,7 +7,7 @@ const {
   configEslintPrettier,
 } = require('./utilities/generator/eslintPrettier');
 const { createReactApp } = require('./utilities/generator/reactapp');
-const { createCrud } = require('./utilities/generator/crud');
+const { createCrud, createEmtyCrud } = require('./utilities/generator/crud');
 // create starter pack
 program.version('1.0.0').description('mern generator');
 // program.option('-ejs', '--viewengineejs', 'add validations');
@@ -46,6 +46,12 @@ program
   .description('create a crud with Joi validations')
   .action((ModelName) => {
     createCrud(ModelName);
+  });
+program
+  .command('empty crud <ModelName>')
+  .description('create aempty crud with Joi validations')
+  .action((ModelName) => {
+    createEmtyCrud(ModelName);
   });
 
 program.parse(process.args);

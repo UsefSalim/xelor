@@ -4,7 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "serverdep": "npm i express dotenv cors cookie-parser mongoose",
+    "serverdep": "npm i express dotenv joi cors cookie-parser mongoose",
     "serverdevdep": "npm i nodemon morgan -D",
     "dependencies": "concurrently \"npm run serverdep\" \"npm run serverdevdep\"",
     "server": "nodemon server.js"

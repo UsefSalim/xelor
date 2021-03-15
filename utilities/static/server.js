@@ -1,7 +1,6 @@
 require('dotenv').config({ path: './config/.env' });
 // packages
 const express = require('express');
-const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
 const mongoose = require('mongoose');
@@ -13,7 +12,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(cors());
-process.env.NODE_ENV === 'developpement' && app.use(morgan('tiny'));
 
 // Db Connexion
 mongoose

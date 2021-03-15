@@ -3,10 +3,12 @@
 const ObjectID = require('mongoose').Types.ObjectId;
 
 // -------------require models----------  //
-const ModelName = require('../models/ModelName.model');
+const ModelName = require('../models/ModelName.models');
 
 // -------------require validations----------  //
-const { ModelNameValidation } = require('../validations/ModelName.validations');
+const {
+  ModelNameValidations,
+} = require('../validations/ModelName.validations');
 
 /* ! @Route  : GET => api/ModelNames
      Desc    : Get all ModelNames
@@ -25,14 +27,20 @@ exports.getAll = async (req, res) => {
      Desc    : Get One  ModelName
      @Access : Pubic
 */
-exports.getOne = (req, res) => {
+exports.getOne = async (req, res) => {
   if (!ObjectID.isValid(req.params.id))
     return res.status(404).json({
-      getOneModelNameError: `l'ID ${req.params.id} n'est pas reconnu`,
+      getOneModelNameError: `l'ID ${req.params.id} n'est pas valid`,
     });
-  ModelName.findById(req.params.id, (err, info) => {
-    !err ? res.status(200).json(info) : res.status(400).json({ err });
-  });
+  try {
+    const currentModelName = await ModelName.findOne({ _id: req.params.id });
+    if (currentModelName) return res.status(200).json(currentModelName);
+    return res.status(404).json({
+      getOneModelNameError: `l'ID ${req.params.id} n'est pas disponible `,
+    });
+  } catch (error) {
+    return res.status(400).json(error);
+  }
 };
 
 /* ! @Route  : POST => api/ModelNames/addModelName
@@ -40,11 +48,11 @@ exports.getOne = (req, res) => {
      @Access : Pubic
 */
 exports.addModelName = async (req, res) => {
-  const { error } = ModelNameValidation(req.body);
+  const { error } = ModelNameValidations(req.body);
   if (error) return res.status(400).json(error.details[0].message);
   const newModelName = new ModelName({ ...req.body });
   try {
-    if (await ModelName.save()) return res.status(201).json(newModelName);
+    if (await newModelName.save()) return res.status(201).json(newModelName);
   } catch (err) {
     return res.status(400).json(err);
   }
@@ -92,7 +100,7 @@ exports.updateModelName = (req, res) => {
     return res
       .status(404)
       .json({ message: `l'ID ${req.params.id} n'est pas reconnu` });
-  const { error } = ModelNameValidation(req.body);
+  const { error } = ModelNameValidations(req.body);
   if (error) return res.status(400).json(error.details[0].message);
   try {
     ModelName.findByIdAndUpdate(

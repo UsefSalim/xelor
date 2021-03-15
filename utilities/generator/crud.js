@@ -3,8 +3,9 @@ const fs = require('fs');
 const { log: terminal } = console;
 const path = process.cwd();
 const staticFiles = `${__dirname}/../static/api/crud`;
+const staticFilesEmpty = `${__dirname}/../static/api/crud/empty-crud`;
 
-const creationFiles = (Model, type) => {
+const creationFiles = (staticFiles, Model, type) => {
   fs.readFile(`${staticFiles}/crud.${type}.js`, 'utf8', (err, data) => {
     if (err) {
       throw err;
@@ -22,21 +23,28 @@ const creationFiles = (Model, type) => {
   });
 };
 
-const insertFiles = (Name, type) => {
+const insertFiles = (staticFiles, Name, type) => {
   if (!fs.existsSync(`./${type}`)) {
     fs.mkdir(`${path}/${type}`, (err) => {
       if (err) throw err;
     });
-    creationFiles(Name, `${type}`);
+    creationFiles(staticFiles, Name, `${type}`);
   } else {
-    creationFiles(Name, `${type}`);
+    creationFiles(staticFiles, Name, `${type}`);
   }
 };
 
 exports.createCrud = (Name) => {
-  insertFiles(Name, 'controllers');
-  insertFiles(Name, 'models');
-  insertFiles(Name, 'routes');
-  insertFiles(Name, 'validations');
+  insertFiles(staticFiles, Name, 'controllers');
+  insertFiles(staticFiles, Name, 'models');
+  insertFiles(staticFiles, Name, 'routes');
+  insertFiles(staticFiles, Name, 'validations');
+  terminal(`crud ${Name} created succesfuly`);
+};
+exports.createEmtyCrud = (Name) => {
+  insertFiles(staticFilesEmpty, Name, 'controllers');
+  insertFiles(staticFilesEmpty, Name, 'models');
+  insertFiles(staticFilesEmpty, Name, 'routes');
+  insertFiles(staticFilesEmpty, Name, 'validations');
   terminal(`crud ${Name} created succesfuly`);
 };
