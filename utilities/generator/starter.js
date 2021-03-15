@@ -38,10 +38,11 @@ exports.createServer = () => {
     });
   });
   !fs.existsSync('.gitignore') &&
-    fs.readFile(`${__dirname}/../../.gitignore`, 'utf-8', (err, data) => {
-      fs.appendFile(`${path}/.gitignore`, data, (err) => {
-        if (err) throw err;
-      });
+    fs.readFile(`${__dirname}/../static/.gitignore`, 'utf-8', (err, data) => {
+      !err &&
+        fs.appendFile(`${path}/.gitignore`, data, (err) => {
+          if (err) throw err;
+        });
     });
   !fs.existsSync('README.md') &&
     fs.readFile(`${__dirname}/../static/README.md`, 'utf-8', (err, data) => {
