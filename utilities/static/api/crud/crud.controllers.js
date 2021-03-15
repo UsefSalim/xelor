@@ -59,10 +59,10 @@ exports.deletModelName = async (req, res) => {
       .status(400)
       .json({ message: `l'ID ${req.params.id} n'est pas reconnu` });
   try {
-    if (await ModelName.remove({ _id: req.params.id }).exec());
-    return res.status(200).json({
-      message: `ModelName avec l'id ${req.params.id} est supprimer avec succées`,
-    });
+    if (await ModelName.remove({ _id: req.params.id }).exec())
+      return res.status(200).json({
+        message: `ModelName avec l'id ${req.params.id} est supprimer avec succées`,
+      });
   } catch (err) {
     return res.status(500).json({ err });
   }

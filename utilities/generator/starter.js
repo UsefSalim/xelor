@@ -43,18 +43,19 @@ exports.createServer = () => {
         if (err) throw err;
       });
     });
-  // !fs.existsSync('README.md') &&
-  fs.readFile(`${__dirname}/../../README.md`, 'utf-8', (err, data) => {
-    fs.appendFile(`${path}/go.README.md`, data, (err) => {
-      if (err) throw err;
+  !fs.existsSync('README.md') &&
+    fs.readFile(`${__dirname}/../static/README.md`, 'utf-8', (err, data) => {
+      !err &&
+        fs.appendFile(`${path}/go.README.md`, data, (err) => {
+          if (err) throw err;
+        });
     });
-  });
   fs.existsSync('package.json') &&
     fs.readFile(`${path}/package.json`, 'utf-8', (err, data) => {
       const jsonFile = JSON.parse(data);
       if (!err) {
         jsonFile.scripts.serverdep =
-          'npm i express dotenv cookie-parser mongoose';
+          'npm i express dotenv cors cookie-parser mongoose';
         jsonFile.scripts.serverdevdep = 'npm i nodemon morgan -D';
         jsonFile.scripts.dependencies =
           'concurrently "npm run serverdep" "npm run serverdevdep"';
