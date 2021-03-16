@@ -2,12 +2,13 @@
 const program = require('commander');
 
 const { createServer } = require('./utilities/generator/starter');
-const { updateServerEjs } = require('./utilities/generator/esjconfig');
+// const { updateServerEjs } = require('./utilities/generator/esjconfig');
 const {
   configEslintPrettier,
 } = require('./utilities/generator/eslintPrettier');
 const { createReactApp } = require('./utilities/generator/reactapp');
 const { createCrud, createEmtyCrud } = require('./utilities/generator/crud');
+const { creatAuth } = require('./utilities/generator/auth');
 // create starter pack
 program.version('1.0.0').description('mern generator');
 // program.option('-ejs', '--viewengineejs', 'add validations');
@@ -27,12 +28,12 @@ program
     createReactApp();
   });
 
-program
-  .command('ejs')
-  .description('use ejs template engine')
-  .action(() => {
-    updateServerEjs();
-  });
+// program
+//   .command('ejs')
+//   .description('use ejs template engine')
+//   .action(() => {
+//     updateServerEjs();
+//   });
 
 /// configurations Prettier and eslint
 program
@@ -48,10 +49,16 @@ program
     createCrud(ModelName);
   });
 program
-  .command('empty crud <ModelName>')
+  .command('empty:crud <ModelName>')
   .description('create aempty crud with Joi validations')
   .action((ModelName) => {
     createEmtyCrud(ModelName);
+  });
+program
+  .command('auth')
+  .description('create authentification')
+  .action(() => {
+    creatAuth();
   });
 
 program.parse(process.args);

@@ -13,38 +13,38 @@ const {
 
 /// * ------------------------- ModelName Route
 
-/* ! @Route  : GET => api/ModelName
+/* ! @Route  : GET => /
      Desc    : Get all ModelNames 
      @Access : Pubic
 */
 router.get('/', getAll);
 
-/* ! @Route  : GET => api/ModelName/:id
+/* ! @Route  : GET => /:id
      Desc    : Get One  ModelName
      @Access : Pubic
 */
 router.get('/:id', getOne);
 
-/* ! @Route  : POST => api/ModelName
+/* ! @Route  : POST => /add
      Desc    : Create ModelName
      @Access : Pubic
 */
 
 router.post('/add', addModelName);
 
-/* ! @Route  : POST => api/ModelName/id
+/* ! @Route  : POST => /:id
      Desc    : Delete One ModelName
      @Access : Pubic
 */
 router.delete('/:id', deletModelName);
 
-/* ! @Route  : DELETE => api/ModelName/
+/* ! @Route  : DELETE => /
      Desc    : Delete All ModelNames
      @Access : Pubic
 */
 router.delete('/', deletAllModelNames);
 
-/* ! @Route  : UPDATE => api/ModelName/:id
+/* ! @Route  : UPDATE => /:id
      Desc    : UPDATE  ModelName
      @Access : Pubic
 */

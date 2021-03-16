@@ -25,7 +25,9 @@ exports.createServer = () => {
       fs.appendFile(
         `${path}/config/.env`,
         `MONGO_URI = 
-       NODE_ENV =`,
+NODE_ENV =
+SECRET_TOKEN =
+JWT_EXPIRATION_TIME = `,
         (err) => {
           if (err) throw err;
         }
