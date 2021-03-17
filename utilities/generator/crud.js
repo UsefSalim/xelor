@@ -42,12 +42,12 @@ exports.createCrud = (Name) => {
   insertFiles(staticFiles, Name, 'models');
   insertFiles(staticFiles, Name, 'routes');
   insertFiles(staticFiles, Name, 'validations');
-  terminal(sucess(`crud`), run(Name), sucess(`created succesfuly`));
+  terminal(sucess(`crud`), run(Name), sucess(`created succesfuly 👏👏`));
 };
 exports.createEmtyCrud = (Name) => {
   insertFiles(staticFilesEmpty, Name, 'controllers');
   insertFiles(staticFilesEmpty, Name, 'models');
   insertFiles(staticFilesEmpty, Name, 'routes');
   insertFiles(staticFilesEmpty, Name, 'validations');
-  terminal(sucess(`crud`), run(Name), sucess(`created succesfuly`));
+  terminal(sucess(`crud`), run(Name), sucess(`created succesfuly 👏👏`));
 };

@@ -111,7 +111,7 @@ exports.configEslintPrettier = () => {
     fs.readFile(`${path}/package.json`, 'utf-8', (err, data) => {
       const jsonFile = JSON.parse(data);
       if (!err) {
-        jsonFile.scripts.eslint =
+        jsonFile.scripts.dep =
           'npm i -D prettier eslint eslint-config-prettier eslint-plugin-prettier eslint-plugin-import eslint-config-airbnb-base';
       }
       fs.writeFile(`${path}/package.json`, JSON.stringify(jsonFile), (err) => {
@@ -126,6 +126,7 @@ exports.configEslintPrettier = () => {
         } else {
           const jsonFile = JSON.parse(data);
           if (!err) {
+            jsonFile.scripts.dev = 'nodemon server.js';
             jsonFile.scripts.dep =
               'npm i -D prettier eslint eslint-config-prettier eslint-plugin-prettier eslint-plugin-import eslint-config-airbnb-base';
           }
@@ -139,7 +140,7 @@ exports.configEslintPrettier = () => {
         }
       });
     });
-  terminal(sucess('eslint and prettier files added ✔'));
+  terminal(sucess('eslint and prettier files added 👌👌'));
   terminal(
     'install dependencies eslint and prettier  ⇛',
     sucess('npm run dep')

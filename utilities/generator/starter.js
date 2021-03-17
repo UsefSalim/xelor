@@ -6,7 +6,7 @@ const run = chalk.bold.blue;
 
 const { log: terminal } = console;
 const path = process.cwd();
-
+const folderName = path.split('\\');
 exports.createServer = () => {
   !fs.existsSync('./controllers') &&
     fs.mkdir(`${path}/controllers`, (err) => {
@@ -31,7 +31,8 @@ exports.createServer = () => {
         `MONGO_URI = 
 NODE_ENV =
 SECRET_TOKEN =
-JWT_EXPIRATION_TIME = `,
+JWT_EXPIRATION_TIME = 
+NODE_ENV = developpement`,
         (err) => {
           if (err) throw err;
         }
@@ -62,7 +63,7 @@ JWT_EXPIRATION_TIME = `,
       const jsonFile = JSON.parse(data);
       if (!err) {
         jsonFile.scripts.dep =
-          'npm i express dotenv joi cors cookie-parser mongoose && npm i nodemon morgan -D';
+          'npm i express dotenv joi cors cookie-parser mongoose && npm i -D nodemon morgan ';
         jsonFile.scripts.dev = 'nodemon server.js';
       }
       fs.writeFile(`${path}/package.json`, JSON.stringify(jsonFile), (err) => {
@@ -71,11 +72,15 @@ JWT_EXPIRATION_TIME = `,
     });
   !fs.existsSync('package.json') &&
     fs.readFile(`${__dirname}/../static/package.json`, 'utf-8', (err, data) => {
-      fs.appendFile(`${path}/package.json`, data, (err) => {
+      const newData = data.replace(
+        /foldername/g,
+        folderName[folderName.length - 1]
+      );
+      fs.appendFile(`${path}/package.json`, newData, (err) => {
         if (err) throw err;
       });
     });
   terminal(sucess('Server created succesfuly  👍👍'));
   terminal('install dependencies ⇛', sucess('npm run dep'));
-  terminal(run('npm start'));
+  terminal(run('npm run dev'));
 };

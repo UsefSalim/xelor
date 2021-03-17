@@ -1,13 +1,11 @@
 {
-  "name": "node",
+  "name": "foldername",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
   "scripts": {
-    "serverdep": "npm i express dotenv joi cors cookie-parser mongoose",
-    "serverdevdep": "npm i nodemon morgan -D",
-    "dependencies": "concurrently \"npm run serverdep\" \"npm run serverdevdep\"",
-    "server": "nodemon server.js"
+    "dep": "npm i express dotenv joi cors cookie-parser mongoose && npm i nodemon morgan -D",
+    "dev": "nodemon server.js"
   },
   "author": "",
   "license": "ISC",

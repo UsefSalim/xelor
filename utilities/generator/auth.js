@@ -1,6 +1,7 @@
 const fs = require('fs');
 const chalk = require('chalk');
 
+const sucess = chalk.bold.green;
 const danger = chalk.bold.red;
 const run = chalk.bold.blue;
 const { log: terminal } = console;
@@ -35,7 +36,7 @@ const insertFiles = (staticFiles, type, Model = 'auth') => {
   }
 };
 exports.creatAuth = () => {
-  if (fs.existsSync('package.json') && fs.existsSync('server.js')) {
+  if (fs.existsSync('package.json')) {
     fs.readFile(`${path}/package.json`, 'utf-8', (err, data) => {
       const jsonFile = JSON.parse(data);
       if (!err) {
