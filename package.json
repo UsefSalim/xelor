@@ -12,6 +12,7 @@
   "author": "Salim Youssef",
   "license": "ISC",
   "dependencies": {
+    "chalk": "^4.1.0",
     "commander": "^7.1.0",
     "concurrently": "^6.0.0"
   },

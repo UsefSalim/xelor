@@ -1,5 +1,8 @@
 const fs = require('fs');
+const chalk = require('chalk');
 
+const sucess = chalk.bold.green;
+// const run = chalk.bold.blue;
 const { log: terminal } = console;
 const path = process.cwd();
 
@@ -123,7 +126,7 @@ exports.configEslintPrettier = () => {
         } else {
           const jsonFile = JSON.parse(data);
           if (!err) {
-            jsonFile.scripts.eslint =
+            jsonFile.scripts.dep =
               'npm i -D prettier eslint eslint-config-prettier eslint-plugin-prettier eslint-plugin-import eslint-config-airbnb-base';
           }
           fs.writeFile(
@@ -136,6 +139,9 @@ exports.configEslintPrettier = () => {
         }
       });
     });
-  terminal('eslint and prettier file added ');
-  terminal('(install dependencies eslint and prettier )> npm run eslint ');
+  terminal(sucess('eslint and prettier files added ✔'));
+  terminal(
+    'install dependencies eslint and prettier  ⇛',
+    sucess('npm run dep')
+  );
 };

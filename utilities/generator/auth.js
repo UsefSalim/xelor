@@ -1,5 +1,8 @@
 const fs = require('fs');
+const chalk = require('chalk');
 
+const danger = chalk.bold.red;
+const run = chalk.bold.blue;
 const { log: terminal } = console;
 const path = process.cwd();
 const staticFiles = `${__dirname}/../static/api/auth`;
@@ -36,7 +39,7 @@ exports.creatAuth = () => {
     fs.readFile(`${path}/package.json`, 'utf-8', (err, data) => {
       const jsonFile = JSON.parse(data);
       if (!err) {
-        jsonFile.scripts.auth = 'npm i jsonwebtoken bcrypt';
+        jsonFile.scripts.dep = 'npm i jsonwebtoken bcrypt';
       }
       fs.writeFile(`${path}/package.json`, JSON.stringify(jsonFile), (err) => {
         err && terminal('err', err);
@@ -47,11 +50,12 @@ exports.creatAuth = () => {
     insertFiles(staticFiles, 'routes');
     insertFiles(staticFiles, 'validations');
     insertFiles(staticFiles, 'models', 'user');
-    terminal('(install dependencies)> npm run auth');
-    terminal('> npm start');
+    terminal(sucess('Authentification  created succesfuly 👊🏼👊🏼'));
+    terminal('install dependencies ⇛ ', run('npm run dep'));
   } else {
     terminal(
-      "veiller configurer votre serverur avant d'utuliser react > go make:server"
+      danger("veiller configurer votre serverur avant d'utuliser react ⇛"),
+      run('xelor server')
     );
   }
 };

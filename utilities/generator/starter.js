@@ -1,4 +1,8 @@
 const fs = require('fs');
+const chalk = require('chalk');
+
+const sucess = chalk.bold.green;
+const run = chalk.bold.blue;
 
 const { log: terminal } = console;
 const path = process.cwd();
@@ -57,12 +61,9 @@ JWT_EXPIRATION_TIME = `,
     fs.readFile(`${path}/package.json`, 'utf-8', (err, data) => {
       const jsonFile = JSON.parse(data);
       if (!err) {
-        jsonFile.scripts.serverdep =
-          'npm i express dotenv joi cors cookie-parser mongoose';
-        jsonFile.scripts.serverdevdep = 'npm i nodemon morgan -D';
-        jsonFile.scripts.dependencies =
-          'concurrently "npm run serverdep" "npm run serverdevdep"';
-        jsonFile.scripts.server = 'nodemon server.js';
+        jsonFile.scripts.dep =
+          'npm i express dotenv joi cors cookie-parser mongoose && npm i nodemon morgan -D';
+        jsonFile.scripts.dev = 'nodemon server.js';
       }
       fs.writeFile(`${path}/package.json`, JSON.stringify(jsonFile), (err) => {
         err && terminal('err', err);
@@ -74,7 +75,7 @@ JWT_EXPIRATION_TIME = `,
         if (err) throw err;
       });
     });
-  terminal('server created succesfuly  ');
-  terminal('(install dependencies)> npm run dependencies ');
-  terminal('> npm run server');
+  terminal(sucess('Server created succesfuly  👍👍'));
+  terminal('install dependencies ⇛', sucess('npm run dep'));
+  terminal(run('npm start'));
 };

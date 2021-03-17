@@ -1,5 +1,9 @@
 const fs = require('fs');
+const chalk = require('chalk');
 
+const sucess = chalk.bold.green;
+const danger = chalk.bold.red;
+const run = chalk.bold.blue;
 const { log: terminal } = console;
 const path = process.cwd();
 
@@ -8,20 +12,22 @@ exports.createReactApp = () => {
     fs.readFile(`${path}/package.json`, 'utf-8', (err, data) => {
       const jsonFile = JSON.parse(data);
       if (!err) {
-        jsonFile.scripts.reactapp = 'npx create-react-app client';
+        jsonFile.scripts.reactapp =
+          'npx create-react-app client && npm i concurrently';
         jsonFile.scripts.client = 'npm start --prefix client';
-        jsonFile.scripts.start =
-          'concurrently "npm run server" "npm run client"';
+        jsonFile.scripts.start = 'concurrently "npm run dev" "npm run client"';
       }
       fs.writeFile(`${path}/package.json`, JSON.stringify(jsonFile), (err) => {
         err && terminal('err', err);
       });
     });
-    terminal('(create reeact app )> npm run reactapp');
-    terminal('> npm start');
+
+    terminal('Create react app ⇛ ', sucess('npm run reactapp'));
+    terminal(run('npm start'));
   } else {
     terminal(
-      "veiller configurer votre serverur avant d'utuliser react > go make:server"
+      danger("veiller configurer votre serverur avant d'utuliser react ⇛"),
+      run('xelor server')
     );
   }
 };
