@@ -1,6 +1,6 @@
 {
   "name": "xelor",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "",
   "main": "index.js",
   "preferGlobal": true,
@@ -9,7 +9,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "",
+  "author": "Salim Youssef",
   "license": "ISC",
   "dependencies": {
     "commander": "^7.1.0",
