@@ -13,7 +13,7 @@ const creationFiles = (staticFiles, Model, type) => {
     if (err) {
       throw err;
     } else {
-      const result = data.replace(/ModelName/g, Model);
+      const result = data.replace(/ModelName/g, Model.toLowerCase());
       fs.writeFile(
         `${path}/${type}/${Model}.${type}.js`,
         result,
@@ -46,8 +46,8 @@ exports.createCrud = (Name) => {
 };
 exports.createEmtyCrud = (Name) => {
   insertFiles(staticFilesEmpty, Name, 'controllers');
-  insertFiles(staticFilesEmpty, Name, 'models');
-  insertFiles(staticFilesEmpty, Name, 'routes');
-  insertFiles(staticFilesEmpty, Name, 'validations');
+  insertFiles(staticFiles, Name, 'models');
+  insertFiles(staticFiles, Name, 'routes');
+  insertFiles(staticFiles, Name, 'validations');
   terminal(sucess(`crud`), run(Name), sucess(`created succesfuly 👏👏`));
 };

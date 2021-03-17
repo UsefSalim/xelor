@@ -1,4 +1,7 @@
 /// * -------------------------------------------------------------------------- ModelName Controllers
+// ------------- require mongoose ObjectId ----//
+const ObjectID = require('mongoose').Types.ObjectId;
+
 // -------------require models----------  //
 const ModelName = require('../models/ModelName.models');
 
@@ -17,7 +20,7 @@ exports.getAll = async (req, res) => {};
      Desc    : Get One  ModelName
      @Access : Pubic
 */
-exports.getOne = (req, res) => {};
+exports.getOne = async (req, res) => {};
 
 /* ! @Route  : POST => api/ModelNames/addModelName
      Desc    : Create ModelName

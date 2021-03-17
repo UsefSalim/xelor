@@ -55,7 +55,9 @@ exports.creatAuth = () => {
     terminal('install dependencies ⇛ ', run('npm run dep'));
   } else {
     terminal(
-      danger("veiller configurer votre serverur avant d'utuliser react ⇛"),
+      danger(
+        'veiller configurer votre serverur avant de crée authentification ⇛'
+      ),
       run('xelor server')
     );
   }
