@@ -119,27 +119,31 @@ exports.configEslintPrettier = () => {
       });
     });
   !fs.existsSync('package.json') &&
-    fs.readFile(`${__dirname}/../static/package.json`, 'utf-8', (err, data) => {
-      fs.appendFile(`${path}/package.json`, data, (err) => {
-        if (err) {
-          throw err;
-        } else {
-          const jsonFile = JSON.parse(data);
-          if (!err) {
-            jsonFile.scripts.dev = 'nodemon server.js';
-            jsonFile.scripts.dep =
-              'npm i -D prettier eslint eslint-config-prettier eslint-plugin-prettier eslint-plugin-import eslint-config-airbnb-base';
-          }
-          fs.writeFile(
-            `${path}/package.json`,
-            JSON.stringify(jsonFile),
-            (err) => {
-              err && terminal('err', err);
+    fs.readFile(
+      `${__dirname}/../static/server/package.json`,
+      'utf-8',
+      (err, data) => {
+        fs.appendFile(`${path}/package.json`, data, (err) => {
+          if (err) {
+            throw err;
+          } else {
+            const jsonFile = JSON.parse(data);
+            if (!err) {
+              jsonFile.scripts.dev = 'nodemon server.js';
+              jsonFile.scripts.dep =
+                'npm i -D prettier eslint eslint-config-prettier eslint-plugin-prettier eslint-plugin-import eslint-config-airbnb-base';
             }
-          );
-        }
-      });
-    });
+            fs.writeFile(
+              `${path}/package.json`,
+              JSON.stringify(jsonFile),
+              (err) => {
+                err && terminal('err', err);
+              }
+            );
+          }
+        });
+      }
+    );
   terminal(sucess('eslint and prettier files added 👌👌'));
   terminal(
     'install dependencies eslint and prettier  ⇛',

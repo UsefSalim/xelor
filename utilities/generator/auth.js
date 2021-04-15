@@ -6,7 +6,7 @@ const danger = chalk.bold.red;
 const run = chalk.bold.blue;
 const { log: terminal } = console;
 const path = process.cwd();
-const staticFiles = `${__dirname}/../static/api/auth`;
+const staticFiles = `${__dirname}/../static/server/api/auth`;
 
 const creationFiles = (staticFiles, type, Model = 'auth') => {
   fs.readFile(`${staticFiles}/${Model}.${type}.js`, 'utf8', (err, data) => {
