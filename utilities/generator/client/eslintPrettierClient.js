@@ -161,6 +161,20 @@ exports.configEslintPrettierClient = () => {
         jsonFile.scripts.dep =
           'npm i -D eslint-plugin-react-hooks eslint-plugin-react eslint-plugin-prettier eslint-plugin-jsx-a11y eslint-plugin-import eslint-config-prettier eslint-config-airbnb prettier eslint';
       }
+      fs.writeFile(
+        `${path}/client/package.json`,
+        JSON.stringify(jsonFile),
+        (err) => {
+          err && terminal('err', err);
+        }
+      );
+    });
+  fs.existsSync('client/package.json') &&
+    fs.readFile(`${path}/package.json`, 'utf-8', (err, data) => {
+      const jsonFile = JSON.parse(data);
+      if (!err) {
+        jsonFile.scripts.dep = 'npm run dep --prefix client';
+      }
       fs.writeFile(`${path}/package.json`, JSON.stringify(jsonFile), (err) => {
         err && terminal('err', err);
       });
