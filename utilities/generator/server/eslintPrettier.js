@@ -28,7 +28,7 @@ exports.configEslintPrettier = () => {
     });
   } else {
     fs.appendFile(
-      `${path}/.vscode/settings.json`,
+      `${path}/../.vscode/settings.json`,
       `{
   "editor.formatOnSave": true,
   "editor.tabSize": 2,

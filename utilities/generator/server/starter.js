@@ -74,7 +74,7 @@ NODE_ENV = development`,
       const jsonFile = JSON.parse(data);
       if (!err) {
         jsonFile.scripts.dep =
-          'npm i express dotenv joi cors cookie-parser mongoose && npm i -D nodemon morgan ';
+          'npm i express dotenv xelor joi cors cookie-parser mongoose && npm i -D nodemon morgan ';
         jsonFile.scripts.dev = 'nodemon server.js';
       }
       fs.writeFile(`${path}/package.json`, JSON.stringify(jsonFile), (err) => {
@@ -85,7 +85,7 @@ NODE_ENV = development`,
     fs.readFile(
       `${__dirname}/../../static/server/package.json`,
       'utf-8',
-      (err, data) => {
+      (_err, data) => {
         const newData = data.replace(
           /foldername/g,
           folderName[folderName.length - 1]

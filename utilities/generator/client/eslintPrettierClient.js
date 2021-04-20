@@ -7,7 +7,7 @@ const { log: terminal } = console;
 const path = `${process.cwd()}/..`;
 
 exports.configEslintPrettierClient = () => {
-  if (!fs.existsSync('./vscode')) {
+  if (!fs.existsSync('../.vscode')) {
     fs.mkdir(`${path}/.vscode`, () => {
       fs.appendFile(
         `${path}/.vscode/settings.json`,
@@ -26,25 +26,8 @@ exports.configEslintPrettierClient = () => {
         }
       );
     });
-  } else {
-    fs.appendFile(
-      `${path}/.vscode/settings.json`,
-      `{
-  "editor.formatOnSave": true,
-  "editor.tabSize": 2,
-  "[javascript]": {
-    "editor.formatOnSave": false
-  },
-  "editor.codeActionsOnSave": {
-    "source.fixAll": true
   }
-}`,
-      (err) => {
-        if (err) throw err;
-      }
-    );
-  }
-  !fs.existsSync('client/.prettierrc') &&
+  !fs.existsSync('../client/.prettierrc') &&
     fs.appendFile(
       `${path}/client/.prettierrc`,
       `{
@@ -60,7 +43,7 @@ exports.configEslintPrettierClient = () => {
         if (err) throw err;
       }
     );
-  !fs.existsSync('client/.eslintrc.js') &&
+  !fs.existsSync('../client/.eslintrc.js') &&
     fs.appendFile(
       `${path}/client/.eslintrc.js`,
       `module.exports = {

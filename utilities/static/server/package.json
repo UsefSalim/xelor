@@ -4,7 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "dep": "npm i express dotenv joi cors cookie-parser mongoose && npm i nodemon morgan -D",
+    "dep": "npm i express dotenv xelor joi cors cookie-parser mongoose && npm i nodemon morgan -D",
     "dev": "nodemon server.js"
   },
   "author": "",
