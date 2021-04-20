@@ -1,14 +1,14 @@
 const fs = require('fs');
 const chalk = require('chalk');
 
-const sucess = chalk.bold.green;
+const success = chalk.bold.green;
 // const run = chalk.bold.blue;
 const { log: terminal } = console;
 const path = process.cwd();
 
 exports.configEslintPrettier = () => {
-  if (!fs.existsSync('./vscode')) {
-    fs.mkdir(`${path}/.vscode`, () => {
+  if (!fs.existsSync('../.vscode')) {
+    fs.mkdir(`${path}/../.vscode`, () => {
       fs.appendFile(
         `${path}/.vscode/settings.json`,
         `{
@@ -144,9 +144,9 @@ exports.configEslintPrettier = () => {
         });
       }
     );
-  terminal(sucess('eslint and prettier files added 👌👌'));
+  terminal(success('eslint and prettier files added 👌👌'));
   terminal(
     'install dependencies eslint and prettier  ⇛',
-    sucess('npm run dep')
+    success('npm run dep')
   );
 };

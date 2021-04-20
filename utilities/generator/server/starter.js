@@ -1,7 +1,7 @@
 const fs = require('fs');
 const chalk = require('chalk');
 
-const sucess = chalk.bold.green;
+const success = chalk.bold.green;
 const run = chalk.bold.blue;
 const { log: terminal } = console;
 const path = process.cwd();
@@ -30,14 +30,14 @@ exports.createServer = () => {
         `MONGO_URI = 
 SECRET_TOKEN =
 JWT_EXPIRATION_TIME = 
-NODE_ENV = developpement`,
+NODE_ENV = development`,
         (err) => {
           if (err) throw err;
         }
       );
     });
   fs.readFile(
-    `${__dirname}/../static/server/server.js`,
+    `${__dirname}/../../static/server/server.js`,
     'utf-8',
     (err, data) => {
       if (err) throw err;
@@ -49,7 +49,7 @@ NODE_ENV = developpement`,
   );
   !fs.existsSync('.gitignore') &&
     fs.readFile(
-      `${__dirname}/../static/server/.gitignore`,
+      `${__dirname}/../../static/server/.gitignore`,
       'utf-8',
       (err, data) => {
         !err &&
@@ -60,7 +60,7 @@ NODE_ENV = developpement`,
     );
   !fs.existsSync('README.md') &&
     fs.readFile(
-      `${__dirname}/../static/server/README.md`,
+      `${__dirname}/../../static/server/README.md`,
       'utf-8',
       (err, data) => {
         !err &&
@@ -83,7 +83,7 @@ NODE_ENV = developpement`,
     });
   !fs.existsSync('package.json') &&
     fs.readFile(
-      `${__dirname}/../static/server/package.json`,
+      `${__dirname}/../../static/server/package.json`,
       'utf-8',
       (err, data) => {
         const newData = data.replace(
@@ -95,7 +95,7 @@ NODE_ENV = developpement`,
         });
       }
     );
-  terminal(sucess('Server created succesfuly  👍👍'));
-  terminal('install dependencies ⇛', sucess('npm run dep'));
+  terminal(success('Server created successfully  👍👍'));
+  terminal('install dependencies ⇛', success('npm run dep'));
   terminal(run('npm run dev'));
 };

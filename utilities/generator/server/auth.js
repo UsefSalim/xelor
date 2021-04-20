@@ -1,12 +1,12 @@
 const fs = require('fs');
 const chalk = require('chalk');
 
-const sucess = chalk.bold.green;
+const success = chalk.bold.green;
 const danger = chalk.bold.red;
 const run = chalk.bold.blue;
 const { log: terminal } = console;
 const path = process.cwd();
-const staticFiles = `${__dirname}/../static/server/api/auth`;
+const staticFiles = `${__dirname}/../../static/server/api/auth`;
 
 const creationFiles = (staticFiles, type, Model = 'auth') => {
   fs.readFile(`${staticFiles}/${Model}.${type}.js`, 'utf8', (err, data) => {
@@ -51,12 +51,12 @@ exports.creatAuth = () => {
     insertFiles(staticFiles, 'routes');
     insertFiles(staticFiles, 'validations');
     insertFiles(staticFiles, 'models', 'user');
-    terminal(sucess('Authentification  created succesfuly 👊🏼👊🏼'));
+    terminal(success('Authentication  created successfully 👊🏼👊🏼'));
     terminal('install dependencies ⇛ ', run('npm run dep'));
   } else {
     terminal(
       danger(
-        'veiller configurer votre serverur avant de crée authentification ⇛'
+        'make sure to configure your server before using authentication ⇛'
       ),
       run('xelor server')
     );

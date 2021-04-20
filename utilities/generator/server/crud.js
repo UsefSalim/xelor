@@ -1,12 +1,12 @@
 const fs = require('fs');
 const chalk = require('chalk');
 
-const sucess = chalk.bold.green;
+const success = chalk.bold.green;
 const run = chalk.bold.blue;
 const { log: terminal } = console;
 const path = process.cwd();
-const staticFiles = `${__dirname}/../static/server/api/crud`;
-const staticFilesEmpty = `${__dirname}/../static/server/api/crud/empty-crud`;
+const staticFiles = `${__dirname}/../../static/server/api/crud`;
+const staticFilesEmpty = `${__dirname}/../../static/server/api/crud/empty-crud`;
 
 const creationFiles = (staticFiles, Model, type) => {
   fs.readFile(`${staticFiles}/crud.${type}.js`, 'utf8', (err, data) => {
@@ -58,28 +58,24 @@ exports.createCrud = (Name) => {
   insertFiles(staticFiles, Name, 'models');
   insertFiles(staticFiles, Name, 'routes');
   insertFiles(staticFiles, Name, 'validations');
-  terminal(sucess(`crud`), run(Name), sucess(`created succesfuly 👏👏`));
+  terminal(success(`crud`), run(Name), success(`created successfully 👏👏`));
 };
-exports.createEmtyCrud = (Name) => {
+exports.createEmptyCrud = (Name) => {
   insertFiles(staticFilesEmpty, Name, 'controllers');
   insertFiles(staticFiles, Name, 'models');
   insertFiles(staticFiles, Name, 'routes');
   insertFiles(staticFiles, Name, 'validations');
-  terminal(sucess(`crud`), run(Name), sucess(`created succesfuly 👏👏`));
+  terminal(success(`crud`), run(Name), success(`created successfully 👏👏`));
 };
 exports.createModel = (Name) => {
   insertFiles(staticFiles, Name, 'models');
-  terminal(sucess(`Model`), run(Name), sucess(`created succesfuly 👏👏`));
-};
-exports.createController = (Name) => {
-  insertFiles(staticFilesEmpty, Name, 'controllers');
-  terminal(sucess(`Controller`), run(Name), sucess(`created succesfuly 👏👏`));
-};
-exports.createRoute = (Name) => {
-  insertFiles(staticFiles, Name, 'routes');
-  terminal(sucess(`Route`), run(Name), sucess(`created succesfuly 👏👏`));
+  terminal(success(`Model`), run(Name), success(`created successfully 👏👏`));
 };
 exports.createValidation = (Name) => {
   insertFiles(staticFiles, Name, 'validations');
-  terminal(sucess(`Validation`), run(Name), sucess(`created succesfuly 👏👏`));
+  terminal(
+    success(`Validation`),
+    run(Name),
+    success(`created successfully 👏👏`)
+  );
 };
