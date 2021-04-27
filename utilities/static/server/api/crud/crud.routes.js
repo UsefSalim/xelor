@@ -1,3 +1,5 @@
+const express = require('express');
+
 const testRoutes = express.Router();
 const {
   addController,
@@ -6,7 +8,7 @@ const {
   deleteOneController,
   updateOneController,
   deletAllController,
-} = require('../controllers/test.controllers');
+} = require('../controllers/ModelName.controllers');
 
 testRoutes.get('/', getAllController);
 testRoutes.delete('/', deletAllController);

@@ -1,5 +1,5 @@
 const xelor = require('xelor');
-const User = require('../models/user.model');
+const User = require('../models/user.models');
 const {
   registerValidations,
   loginValidations,

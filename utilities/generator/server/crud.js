@@ -14,7 +14,7 @@ const creationFiles = (staticFiles, Model, type) => {
       throw err;
     } else {
       const result = data
-        .replace(/ModelName/g, Model.charAt(0).toUpperCase() + Model.slice(1))
+        .replace(/ModelName/g, Model)
         .replace(/test/g, Model.toLowerCase());
       fs.writeFile(
         `${path}/src/${type}/${Model}.${type}.js`,

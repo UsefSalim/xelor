@@ -52,7 +52,6 @@ exports.creatAuth = () => {
     insertFiles(staticFiles, 'validations');
     insertFiles(staticFiles, 'models', 'user');
     terminal(success('Authentication  created successfully 👊🏼👊🏼'));
-    terminal('install dependencies ⇛ ', run('npm run dep'));
   } else {
     terminal(
       danger(

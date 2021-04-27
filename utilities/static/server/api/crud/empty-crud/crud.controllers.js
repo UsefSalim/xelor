@@ -1,4 +1,4 @@
-const ModelName = require('../models/test.models');
+const ModelName = require('../models/ModelName.models');
 
 exports.addController = async (req, res) => {};
 

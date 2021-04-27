@@ -25,12 +25,12 @@ program
   .action(() => {
     createServer();
   });
-program
-  .command('client')
-  .description('create a client side with react')
-  .action(() => {
-    createReactApp();
-  });
+// program
+//   .command('client')
+//   .description('create a client side with react')
+//   .action(() => {
+//     createReactApp();
+//   });
 /// configurations Prettier and eslint
 program
   .command('server:prettier')
@@ -42,25 +42,29 @@ program
   .command('crud <ModelName>')
   .description('create a crud with Joi validations')
   .action((ModelName) => {
-    createCrud(ModelName);
+    const Model = ModelName.charAt(0).toUpperCase() + ModelName.slice(1);
+    createCrud(Model);
   });
 program
   .command('empty:crud <ModelName>')
   .description('create an empty crud with Joi validations')
   .action((ModelName) => {
-    createEmptyCrud(ModelName);
+    const Model = ModelName.charAt(0).toUpperCase() + ModelName.slice(1);
+    createEmptyCrud(Model);
   });
 program
   .command('model <ModelName>')
   .description('create an empty Model')
   .action((ModelName) => {
-    createModel(ModelName);
+    const Model = ModelName.charAt(0).toUpperCase() + ModelName.slice(1);
+    createModel(Model);
   });
 program
   .command('validation <ModelName>')
   .description('create an empty Validation')
   .action((ModelName) => {
-    createValidation(ModelName);
+    const Model = ModelName.charAt(0).toUpperCase() + ModelName.slice(1);
+    createValidation(Model);
   });
 
 program
@@ -69,11 +73,11 @@ program
   .action(() => {
     creatAuth();
   });
-program
-  .command('client:prettier')
-  .description('create Mern Application')
-  .action(() => {
-    configEslintPrettierClient();
-  });
+// program
+//   .command('client:prettier')
+//   .description('create Mern Application')
+//   .action(() => {
+//     configEslintPrettierClient();
+//   });
 
 program.parse(process.args);
