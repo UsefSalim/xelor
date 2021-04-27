@@ -13,9 +13,11 @@ const creationFiles = (staticFiles, Model, type) => {
     if (err) {
       throw err;
     } else {
-      const result = data.replace(/ModelName/g, Model.toLowerCase());
+      const result = data
+        .replace(/ModelName/g, Model.charAt(0).toUpperCase() + Model.slice(1))
+        .replace(/test/g, Model.toLowerCase());
       fs.writeFile(
-        `${path}/${type}/${Model}.${type}.js`,
+        `${path}/src/${type}/${Model}.${type}.js`,
         result,
         'utf8',
         (err) => {
@@ -26,21 +28,21 @@ const creationFiles = (staticFiles, Model, type) => {
   });
 };
 
-const generateClientCrud = () => {
-  fs.readFile(`${staticFiles}/client/App.js`, 'utf-8', (err, data) => {
-    if (err) {
-      throw err;
-    } else {
-      fs.writeFile(`${path}/client/src/App.js`, data, 'utf8', (err) => {
-        if (err) throw err;
-      });
-    }
-  });
-};
+// const generateClientCrud = () => {
+//   fs.readFile(`${staticFiles}/client/App.js`, 'utf-8', (err, data) => {
+//     if (err) {
+//       throw err;
+//     } else {
+//       fs.writeFile(`${path}/client/src/App.js`, data, 'utf8', (err) => {
+//         if (err) throw err;
+//       });
+//     }
+//   });
+// };
 
 const insertFiles = (staticFiles, Name, type) => {
-  if (!fs.existsSync(`./${type}`)) {
-    fs.mkdir(`${path}/${type}`, (err) => {
+  if (!fs.existsSync(`./src/${type}`)) {
+    fs.mkdir(`${path}/src/${type}`, (err) => {
       if (err) throw err;
     });
     creationFiles(staticFiles, Name, `${type}`);

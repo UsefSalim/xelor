@@ -14,7 +14,7 @@ const creationFiles = (staticFiles, type, Model = 'auth') => {
       throw err;
     } else {
       fs.writeFile(
-        `${path}/${type}/${Model}.${type}.js`,
+        `${path}/src/${type}/${Model}.${type}.js`,
         data,
         'utf8',
         (err) => {
@@ -26,8 +26,8 @@ const creationFiles = (staticFiles, type, Model = 'auth') => {
 };
 
 const insertFiles = (staticFiles, type, Model = 'auth') => {
-  if (!fs.existsSync(`./${type}`)) {
-    fs.mkdir(`${path}/${type}`, (err) => {
+  if (!fs.existsSync(`./src/${type}`)) {
+    fs.mkdir(`${path}/src/${type}`, (err) => {
       if (err) throw err;
     });
     creationFiles(staticFiles, `${type}`, Model);

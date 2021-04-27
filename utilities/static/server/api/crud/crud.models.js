@@ -2,11 +2,11 @@ const mongoose = require('mongoose');
 
 const { Schema, model } = mongoose;
 
-const ModelNameSchema = Schema({
+const testSchema = Schema({
   // name: {
   //   type: String,
   //   required: true,
   // }
 });
 
-module.exports = model('ModelName', ModelNameSchema);
+module.exports = model('test', testSchema);

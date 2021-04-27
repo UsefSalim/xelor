@@ -1,29 +1,14 @@
 const express = require('express');
 
-const router = express.Router();
-
+const authRoutes = express.Router();
 const {
-  logoutController,
-  loginController,
   registerController,
+  loginController,
+  logoutController,
 } = require('../controllers/auth.controllers');
 
-/* ! @Route  : POST => /register
-     Desc    : Regsiter the users
-     @Access : Pubic
-*/
-router.post('/register', registerController);
+authRoutes.post('/register', registerController);
+authRoutes.post('/login', loginController);
+authRoutes.get('/logout', logoutController);
 
-/* ! @Route  : POST => /login
-     Desc    : login the users
-     @Access : Pubic
-*/
-router.post('/login', loginController);
-
-/* ! @Route  : POST => /logout
-     Desc    : Logout the users
-     @Access : Pubic
-*/
-router.post('/logout', logoutController);
-
-module.exports = router;
+module.exports = authRoutes;
