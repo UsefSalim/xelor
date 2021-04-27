@@ -1,6 +1,5 @@
 /* eslint-disable no-underscore-dangle */
 const jwt = require('jsonwebtoken');
-
 const bcrypt = require('bcrypt');
 const ObjectID = require('mongoose').Types.ObjectId;
 
