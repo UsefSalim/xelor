@@ -227,14 +227,16 @@ exports.register = async (
   );
   if (Role) newUser.role = Role;
   const savedUser = await newUser.save();
-  const token = this.createToken({ id: newUser._id, role: newUser.role });
-  return res
-    .status(200)
-    .cookie('_token', token, {
-      httpOnly: true,
-      maxAge: process.env.JWT_EXPIRATION_TIME,
-    })
-    .json({ role: savedUser.role, isAuthenticated: true });
+  if (savedUser) {
+    const token = this.createToken({ id: newUser._id, role: newUser.role });
+    return res
+      .status(200)
+      .cookie('_token', token, {
+        httpOnly: true,
+        maxAge: process.env.JWT_EXPIRATION_TIME,
+      })
+      .json({ role: savedUser.role, isAuthenticated: true });
+  }
 };
 
 exports.login = async (
