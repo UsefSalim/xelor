@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 const program = require('commander');
-
+const { exec } = require('child_process');
 // const { option } = require('commander');
 const { createServer } = require('./utilities/generator/server/starter');
 const {
@@ -25,13 +25,21 @@ program
   .action(() => {
     createServer();
   });
-// program
-//   .command('client')
-//   .description('create a client side with react')
-//   .action(() => {
-//     createReactApp();
-//   });
-/// configurations Prettier and eslint
+program
+  .command('mern app')
+  .description('create a mern app  side')
+  .action(() => {
+    exec(
+      'git clone https://github.com/UsefSalim/mernStarter.git',
+      (err, stdout, stderr) => {
+        if (err) {
+          console.error(`git`);
+          return;
+        }
+        console.log(`Mern App Generated -> .\\mernStarter`);
+      }
+    );
+  });
 program
   .command('server:prettier')
   .description('configurations and generate file prettier and eslint ')
