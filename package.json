@@ -1,6 +1,6 @@
 {
   "name": "xelor",
-  "version": "1.2.12",
+  "version": "1.4.0",
   "description": "",
   "main": "index.js",
   "preferGlobal": true,
@@ -13,7 +13,8 @@
   "license": "ISC",
   "dependencies": {
     "chalk": "^4.1.0",
-    "commander": "^7.1.0"
+    "commander": "^7.1.0",
+    "shelljs": "^0.8.4"
   },
   "devDependencies": {
     "eslint": "^7.20.0",

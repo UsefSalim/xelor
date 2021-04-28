@@ -1,15 +1,9 @@
 #!/usr/bin/env node
 const program = require('commander');
-const { exec } = require('child_process');
-// const { option } = require('commander');
 const { createServer } = require('./utilities/generator/server/starter');
 const {
   configEslintPrettier,
 } = require('./utilities/generator/server/eslintPrettier');
-const {
-  configEslintPrettierClient,
-} = require('./utilities/generator/client/eslintPrettierClient');
-const { createReactApp } = require('./utilities/generator/client/reactapp');
 const {
   createCrud,
   createEmptyCrud,
@@ -17,75 +11,70 @@ const {
   createValidation,
 } = require('./utilities/generator/server/crud');
 const { creatAuth } = require('./utilities/generator/server/auth');
+const { mern, mernAuth } = require('./utilities/generator/config');
 // create starter pack
 program.version('1.0.0').description('mern generator');
 program
+  .command('mern <ProjectName>')
+  .description('create a mern app')
+  .action((ProjectName) => {
+    mern(ProjectName);
+  });
+program
+  .command('mern:auth <ProjectName>')
+  .description('create a mern app with authentication')
+  .action((ProjectName) => {
+    mernAuth(ProjectName);
+  });
+program
   .command('server')
-  .description('create a server side')
+  .description('Server ->  create a server side')
   .action(() => {
     createServer();
   });
 program
-  .command('mern app')
-  .description('create a mern app  side')
+  .command('server:auth')
+  .description('Server ->  add authentification to the server app')
   .action(() => {
-    exec(
-      'git clone https://github.com/UsefSalim/mernStarter.git',
-      (err, stdout, stderr) => {
-        if (err) {
-          console.error(`git`);
-          return;
-        }
-        console.log(`Mern App Generated -> .\\mernStarter`);
-      }
-    );
+    creatAuth();
   });
 program
   .command('server:prettier')
-  .description('configurations and generate file prettier and eslint ')
+  .description(
+    'Server ->  configurations and generate file prettier and eslint '
+  )
   .action(() => {
     configEslintPrettier();
   });
 program
   .command('crud <ModelName>')
-  .description('create a crud with Joi validations')
+  .description('Server ->  add a crud with Joi validations to the server')
   .action((ModelName) => {
     const Model = ModelName.charAt(0).toUpperCase() + ModelName.slice(1);
     createCrud(Model);
   });
 program
   .command('empty:crud <ModelName>')
-  .description('create an empty crud with Joi validations')
+  .description(
+    'Server ->  add an empty crud with Joi validations to the server'
+  )
   .action((ModelName) => {
     const Model = ModelName.charAt(0).toUpperCase() + ModelName.slice(1);
     createEmptyCrud(Model);
   });
 program
   .command('model <ModelName>')
-  .description('create an empty Model')
+  .description('Server -> create an empty Model')
   .action((ModelName) => {
     const Model = ModelName.charAt(0).toUpperCase() + ModelName.slice(1);
     createModel(Model);
   });
 program
   .command('validation <ModelName>')
-  .description('create an empty Validation')
+  .description('Server ->  create an empty Validation')
   .action((ModelName) => {
     const Model = ModelName.charAt(0).toUpperCase() + ModelName.slice(1);
     createValidation(Model);
   });
-
-program
-  .command('auth')
-  .description('create authentification')
-  .action(() => {
-    creatAuth();
-  });
-// program
-//   .command('client:prettier')
-//   .description('create Mern Application')
-//   .action(() => {
-//     configEslintPrettierClient();
-//   });
 
 program.parse(process.args);
