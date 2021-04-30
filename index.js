@@ -1,3 +1,4 @@
+/* eslint-disable no-return-await */
 /* eslint-disable no-underscore-dangle */
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
@@ -6,41 +7,13 @@ const ObjectID = require('mongoose').Types.ObjectId;
 /**
  *
  * @param {Object} Model
- * @param {*} unique
- * @param {String} finder
+ * @param {Object} finder
  * @param {String} populate
  * @param {String} select
  * @returns
  */
-exports.ifExist = async (
-  Model,
-  unique,
-  finder,
-  populate = null,
-  select = null
-) => {
-  let ifExist = '';
-  switch (finder) {
-    case 'name':
-      ifExist = await Model.findOne({ name: unique })
-        .populate(populate)
-        .select(select);
-      break;
-    case 'email':
-      ifExist = await Model.findOne({ email: unique })
-        .populate(populate)
-        .select(select);
-      break;
-    case '_id':
-      ifExist = await Model.findOne({ _id: unique })
-        .populate(populate)
-        .select(select);
-      break;
-    default:
-      break;
-  }
-  return ifExist;
-};
+exports.ifExist = async (Model, finder, populate = null, select = null) =>
+  await Model.findOne(finder).populate(populate).select(select);
 
 /**
  *
@@ -78,19 +51,14 @@ exports.getAll = async (
  * @param {String} select
  * @returns
  */
-exports.getOne = async (
-  res,
-  Model,
-  unique,
-  finder,
-  populate = null,
-  select = null
-) => {
-  if (!ObjectID.isValid(unique))
-    return res.status(400).json({ message: `l'ID ${unique} n'est pas valide` });
-  const single = await this.ifExist(Model, unique, finder, populate, select);
+exports.getOne = async (res, Model, finder, populate = null, select = null) => {
+  if (finder._id && !ObjectID.isValid(finder._id))
+    return res
+      .status(400)
+      .json({ message: `l'ID ${finder._id} n'est pas valide` });
+  const single = await this.ifExist(Model, finder, populate, select);
   if (single) return res.status(200).json(single);
-  return res.status(400).json(`${unique} non existant`);
+  return res.status(400).json(`element non existant`);
 };
 
 /**
@@ -103,21 +71,14 @@ exports.getOne = async (
  * @param {String} finder
  * @returns
  */
-exports.add = async (
-  req,
-  res,
-  Model,
-  validation = null,
-  unique = null,
-  finder = null
-) => {
+exports.add = async (req, res, Model, validation = null, finder = null) => {
   if (validation) {
     const { error } = validation(req.body);
     if (error) return res.status(400).json(error.details[0].message);
   }
-  if (unique) {
-    const ifExist = await this.ifExist(Model, unique, finder);
-    if (ifExist) return res.status(400).json(`${unique} existant `);
+  if (finder) {
+    const ifExist = await this.ifExist(Model, finder);
+    if (ifExist) return res.status(400).json(`element existant `);
   }
   let newElement = new Model({ ...req.body });
   newElement = await newElement.save();

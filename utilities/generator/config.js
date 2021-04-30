@@ -1,4 +1,3 @@
-const { exec, execSync } = require('child_process');
 const shell = require('shelljs');
 
 const path = process.cwd();
