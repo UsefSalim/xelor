@@ -5,8 +5,7 @@ const {
 } = require('../validations/ModelName.validations');
 
 exports.addController = async (req, res) => {
-  const { name } = req.body;
-  await xelor.add(req, res, ModelName, ModelNameValidations, name, 'name');
+  await xelor.add(req, res, ModelName, ModelNameValidations);
 };
 
 exports.getAllController = async (req, res) => {
@@ -15,7 +14,7 @@ exports.getAllController = async (req, res) => {
 
 exports.getOneController = async (req, res) => {
   const { _id } = req.params;
-  await xelor.getOne(res, ModelName, _id, '_id', false, '-_id name');
+  await xelor.getOne(res, ModelName, { _id });
 };
 
 exports.deleteOneController = async (req, res) => {
@@ -26,6 +25,6 @@ exports.updateOneController = async (req, res) => {
   await xelor.update(req, res, ModelName, ModelNameValidations);
 };
 
-exports.deletAllController = async (req, res) => {
+exports.deleteAllController = async (req, res) => {
   await xelor.deletAll(res, ModelName);
 };

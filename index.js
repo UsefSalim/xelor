@@ -136,7 +136,7 @@ exports.update = (req, res, Model, validation = null) => {
  * @param {Object} Model
  * @returns
  */
-exports.deletAll = async (res, Model) => {
+exports.deleteAll = async (res, Model) => {
   if (await Model.deleteMany())
     return res.status(200).json({
       message: `table  supprimer`,
@@ -168,7 +168,6 @@ exports.register = async (
   res,
   Model,
   validation = null,
-  unique = null,
   finder = null,
   Role = null
 ) => {
@@ -176,9 +175,9 @@ exports.register = async (
     const { error } = validation(req.body);
     if (error) return res.status(400).json(error.details[0].message);
   }
-  if (unique) {
-    const ifUserExist = await this.ifExist(Model, unique, finder);
-    if (ifUserExist) return res.status(400).json(`${unique} existant `);
+  if (finder) {
+    const ifUserExist = await this.ifExist(Model, finder);
+    if (ifUserExist) return res.status(400).json(` existant `);
   }
   const newUser = new Model({ ...req.body });
   newUser.password = await bcrypt.hash(
@@ -199,24 +198,17 @@ exports.register = async (
   }
 };
 
-exports.login = async (
-  req,
-  res,
-  Model,
-  validation = null,
-  unique = null,
-  finder = null
-) => {
+exports.login = async (req, res, Model, validation = null, finder = null) => {
   if (validation) {
     const { error } = validation(req.body);
     if (error) return res.status(400).json(error.details[0].message);
   }
-  const UserExist = await this.ifExist(Model, unique, finder);
+  const UserExist = await this.ifExist(Model, finder);
   if (
     !UserExist ||
     !(await bcrypt.compare(req.body.password, UserExist.password))
   )
-    return res.status(400).json('Mail ou password Incorrect');
+    return res.status(400).json('identifiant ou password Incorrect');
   const token = this.createToken({ id: UserExist._id, role: UserExist.role });
   return res
     .status(200)
