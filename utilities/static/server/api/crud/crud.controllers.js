@@ -1,30 +1,28 @@
 const xelor = require('xelor');
-const ModelName = require('../models/ModelName.models');
-const {
-  ModelNameValidations,
-} = require('../validations/ModelName.validations');
+const Test = require('../models/Test.models');
+const { TestValidations } = require('../validations/Test.validations');
 
 exports.addController = async (req, res) => {
-  await xelor.add(req, res, ModelName, ModelNameValidations);
+  await xelor.add(req, res, Test, TestValidations);
 };
 
 exports.getAllController = async (req, res) => {
-  await xelor.getAll(res, ModelName);
+  await xelor.getAll(res, Test);
 };
 
 exports.getOneController = async (req, res) => {
   const { _id } = req.params;
-  await xelor.getOne(res, ModelName, { _id });
+  await xelor.getOne(res, Test, { _id });
 };
 
 exports.deleteOneController = async (req, res) => {
-  await xelor.deleteOne(req, res, ModelName);
+  await xelor.deleteOne(req, res, Test);
 };
 
 exports.updateOneController = async (req, res) => {
-  await xelor.update(req, res, ModelName, ModelNameValidations);
+  await xelor.update(req, res, Test, TestValidations);
 };
 
-exports.deleteAllController = async (req, res) => {
-  await xelor.deletAll(res, ModelName);
+exports.deletAllController = async (req, res) => {
+  await xelor.deleteAll(res, Test);
 };
