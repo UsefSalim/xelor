@@ -53,7 +53,9 @@ program
       insertFiles(staticFiles, 'Multer', 'middlewares');
     }
     if (options.redux) {
-      shell.exec('pnpm i @reduxjs/toolkit react-redux redux-saga');
+      shell.exec(
+        'pnpm i @reduxjs/toolkit react-redux redux-saga --prefix ../client'
+      );
       reduxConfig(Model);
     }
   });
