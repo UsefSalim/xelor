@@ -18,14 +18,14 @@ exports.reduxConfig = (Model) => {
       if (err) console.log('veiller lancer la commande depuit le server');
     });
   }
-  if (!fs.existsSync(`../client/src/redux/saga`)) {
-    fs.mkdir(`${path}/../client/src/redux/saga`, (err) => {
+  if (!fs.existsSync(`../client/src/redux/sagas`)) {
+    fs.mkdir(`${path}/../client/src/redux/sagas`, (err) => {
       if (err) console.log('veiller lancer la commande depuit le server');
     });
-    fs.mkdir(`${path}/../client/src/redux/saga/handlers`, (err) => {
+    fs.mkdir(`${path}/../client/src/redux/sagas/handlers`, (err) => {
       if (err) console.log('veiller lancer la commande depuit le server');
     });
-    fs.mkdir(`${path}/../client/src/redux/saga/requests`, (err) => {
+    fs.mkdir(`${path}/../client/src/redux/sagas/requests`, (err) => {
       if (err) console.log('veiller lancer la commande depuit le server');
     });
   }
@@ -43,12 +43,12 @@ exports.reduxConfig = (Model) => {
       );
     });
   }
-  if (!fs.existsSync(`../client/src/redux/saga/rootSage.js`)) {
+  if (!fs.existsSync(`../client/src/redux/sagas/rootSage.js`)) {
     fs.readFile(`${staticFiles}/rootSaga.js`, 'utf8', (err, data) => {
       if (err) throw err;
       const result = data.replace(/ModelName/g, Model);
       fs.writeFile(
-        `${path}/../client/src/redux/saga/rootSaga.js`,
+        `${path}/../client/src/redux/sagas/rootSaga.js`,
         result,
         'utf8',
         (err) => {
@@ -71,12 +71,12 @@ exports.reduxConfig = (Model) => {
       );
     });
   }
-  if (!fs.existsSync(`../client/src/redux/saga/handlers/${Model}.slice.js`)) {
+  if (!fs.existsSync(`../client/src/redux/sagas/handlers/${Model}.slice.js`)) {
     fs.readFile(`${staticFiles}/handler.js`, 'utf8', (err, data) => {
       if (err) throw err;
       const result = data.replace(/ModelName/g, Model);
       fs.writeFile(
-        `${path}/../client/src/redux/saga/handlers/${Model}.handler.js`,
+        `${path}/../client/src/redux/sagas/handlers/${Model}.handler.js`,
         result,
         'utf8',
         (err) => {
@@ -85,12 +85,12 @@ exports.reduxConfig = (Model) => {
       );
     });
   }
-  if (!fs.existsSync(`../client/src/redux/saga/requests/${Model}.slice.js`)) {
+  if (!fs.existsSync(`../client/src/redux/sagas/requests/${Model}.slice.js`)) {
     fs.readFile(`${staticFiles}/request.js`, 'utf8', (err, data) => {
       if (err) throw err;
       const result = data.replace(/ModelName/g, Model);
       fs.writeFile(
-        `${path}/../client/src/redux/saga/requests/${Model}.request.js`,
+        `${path}/../client/src/redux/sagas/requests/${Model}.request.js`,
         result,
         'utf8',
         (err) => {

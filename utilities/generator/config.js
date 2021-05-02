@@ -33,8 +33,8 @@ exports.mern = (ProjectName) => {
     // );
     terminal(run('Install Dependencies ... 🕒🕒'));
     shell.exec(`npm i -g pnpm `);
-    shell.exec(`cd ./${ProjectName}/server && pnpm i && pnpm up`);
-    shell.exec(`cd ./${ProjectName}/client && pnpm i && pnpm up`);
+    shell.exec(`cd ./${ProjectName}/server && pnpm i && pnpm up xelor`);
+    shell.exec(`cd ./${ProjectName}/client && pnpm i && pnpm up xelor`);
     shell.exec(`cd ./${ProjectName} && code .`);
     shell.exec(`cd ./${ProjectName}/server && pnpm run dev`);
   } catch (error) {
@@ -67,8 +67,8 @@ exports.mernAuth = (ProjectName) => {
     terminal(run('Install Dependencies ... 🕒🕒'));
 
     shell.exec(`npm i -g pnpm `);
-    shell.exec(`cd ./${ProjectName}/server && pnpm i  && pnpm up`);
-    shell.exec(`cd ./${ProjectName}/client && pnpm i  && pnpm up`);
+    shell.exec(`cd ./${ProjectName}/server && pnpm i  && pnpm up xelor`);
+    shell.exec(`cd ./${ProjectName}/client && pnpm i  && pnpm up xelor`);
     shell.exec(`cd ./${ProjectName} && code .`);
     shell.exec(`cd ./${ProjectName}/server && pnpm run dev`);
   } catch (error) {
@@ -96,7 +96,7 @@ exports.server = (ProjectName) => {
     terminal(success('Files created succesfuly ✌✌'));
     terminal(run('Install Dependencies ... 🕒🕒'));
     shell.exec(`npm i -g pnpm `);
-    shell.exec(`cd ./${ProjectName}  && pnpm i  && pnpm up`);
+    shell.exec(`cd ./${ProjectName}  && pnpm i  && pnpm up xelor`);
     shell.exec(`cd ./${ProjectName}  && code .`);
     shell.exec(`cd ./${ProjectName} && pnpm run dev`);
   } catch (error) {
