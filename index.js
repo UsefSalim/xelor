@@ -53,9 +53,7 @@ exports.getAll = async (
  */
 exports.getOne = async (res, Model, finder, populate = null, select = null) => {
   if (finder._id && !ObjectID.isValid(finder._id))
-    return res
-      .status(400)
-      .json({ message: `l'ID ${finder._id} n'est pas valide` });
+    return res.status(400).json({ message: `l'ID ${finder} n'est pas valide` });
   const single = await this.ifExist(Model, finder, populate, select);
   if (single) return res.status(200).json(single);
   return res.status(400).json(`element non existant`);
@@ -67,11 +65,19 @@ exports.getOne = async (res, Model, finder, populate = null, select = null) => {
  * @param {Response} res
  * @param {Object} Model
  * @param {Object} validation
- * @param {*} unique
- * @param {String} finder
+ * @param {Object} finder
+ * @param {Object} multer
  * @returns
  */
-exports.add = async (req, res, Model, validation = null, finder = null) => {
+exports.add = async (
+  req,
+  res,
+  Model,
+  validation = null,
+  finder = null,
+  multer = null
+) => {
+  let newElement;
   if (validation) {
     const { error } = validation(req.body);
     if (error) return res.status(400).json(error.details[0].message);
@@ -80,7 +86,9 @@ exports.add = async (req, res, Model, validation = null, finder = null) => {
     const ifExist = await this.ifExist(Model, finder);
     if (ifExist) return res.status(400).json(`element existant `);
   }
-  let newElement = new Model({ ...req.body });
+  !multer
+    ? (newElement = new Model({ ...req.body }))
+    : (newElement = new Model({ ...req.body, ...multer }));
   newElement = await newElement.save();
   return res.status(201).json(newElement);
 };
@@ -90,18 +98,24 @@ exports.add = async (req, res, Model, validation = null, finder = null) => {
  * @param {Request} req
  * @param {Response} res
  * @param {Object} Model
+ * @param {Object} finder
  * @returns
  */
-exports.deleteOne = async (req, res, Model) => {
+exports.deleteOne = async (req, res, Model, finder = null) => {
   if (!ObjectID.isValid(req.params._id))
     return res
       .status(404)
       .json({ message: `l'ID ${req.params._id} n'est pas valide` });
+
+  if (finder && (await Model.remove(finder).exec()))
+    return res.status(200).json({
+      message: `${finder} est supprimer avec succées`,
+    });
   if (await Model.remove({ _id: req.params._id }).exec())
     return res.status(200).json({
       message: `${req.params._id} est supprimer avec succées`,
     });
-  return res.status(400).json(`${req.params._id} non existant`);
+  return res.status(400).json(`element non existant`);
 };
 
 /**
@@ -110,9 +124,10 @@ exports.deleteOne = async (req, res, Model) => {
  * @param {Response} res
  * @param {Object} Model
  * @param {Object} validation
+ * @param {Object} multer
  * @returns
  */
-exports.update = (req, res, Model, validation = null) => {
+exports.update = (req, res, Model, validation = null, multer = null) => {
   if (!ObjectID.isValid(req.params._id))
     return res
       .status(404)
@@ -121,14 +136,23 @@ exports.update = (req, res, Model, validation = null) => {
     const { error } = validation(req.body);
     if (error) return res.status(400).json(error.details[0].message);
   }
-  Model.findByIdAndUpdate(
-    { _id: req.params._id },
-    { $set: { ...req.body } },
-    { new: true, useFindAndModify: true, upsert: true },
-    (err, updated) => {
-      !err ? res.status(200).json(updated) : res.status(400).json({ err });
-    }
-  );
+  multer
+    ? Model.findByIdAndUpdate(
+        { _id: req.params._id },
+        { $set: { ...req.body } },
+        { new: true, useFindAndModify: true, upsert: true },
+        (err, updated) => {
+          !err ? res.status(200).json(updated) : res.status(400).json({ err });
+        }
+      )
+    : Model.findByIdAndUpdate(
+        { _id: req.params._id },
+        { $set: { ...req.body, ...multer } },
+        { new: true, useFindAndModify: true, upsert: true },
+        (err, updated) => {
+          !err ? res.status(200).json(updated) : res.status(400).json({ err });
+        }
+      );
 };
 /**
  *
@@ -177,7 +201,7 @@ exports.register = async (
   }
   if (finder) {
     const ifUserExist = await this.ifExist(Model, finder);
-    if (ifUserExist) return res.status(400).json(` existant `);
+    if (ifUserExist) return res.status(400).json(`${finder} existant `);
   }
   const newUser = new Model({ ...req.body });
   newUser.password = await bcrypt.hash(

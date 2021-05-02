@@ -37,15 +37,6 @@ const insertFiles = (staticFiles, type, Model = 'auth') => {
 };
 exports.creatAuth = () => {
   if (fs.existsSync('package.json')) {
-    fs.readFile(`${path}/package.json`, 'utf-8', (err, data) => {
-      const jsonFile = JSON.parse(data);
-      if (!err) {
-        jsonFile.scripts.dep = 'npm i jsonwebtoken bcrypt';
-      }
-      fs.writeFile(`${path}/package.json`, JSON.stringify(jsonFile), (err) => {
-        err && terminal('err', err);
-      });
-    });
     insertFiles(staticFiles, 'controllers');
     insertFiles(staticFiles, 'middlewares');
     insertFiles(staticFiles, 'routes');

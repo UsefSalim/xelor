@@ -26,7 +26,7 @@ const creationFiles = (staticFiles, Model, type) => {
     }
   });
 };
-const insertFiles = (staticFiles, Name, type) => {
+exports.insertFiles = (staticFiles, Name, type) => {
   if (!fs.existsSync(`./src/${type}`)) {
     fs.mkdir(`${path}/src/${type}`, (err) => {
       if (err) throw err;
@@ -37,14 +37,14 @@ const insertFiles = (staticFiles, Name, type) => {
   }
 };
 
-exports.prefixClient = () => {
-  generateClientCrud();
-};
+// exports.prefixClient = () => {
+//   generateClientCrud();
+// };
 
 exports.createCrud = (Name) => {
-  insertFiles(staticFiles, Name, 'controllers');
-  insertFiles(staticFiles, Name, 'models');
-  insertFiles(staticFiles, Name, 'routes');
-  insertFiles(staticFiles, Name, 'validations');
+  this.insertFiles(staticFiles, Name, 'controllers');
+  this.insertFiles(staticFiles, Name, 'models');
+  this.insertFiles(staticFiles, Name, 'routes');
+  this.insertFiles(staticFiles, Name, 'validations');
   terminal(success(`crud`), run(Name), success(`created successfully 👏👏`));
 };
