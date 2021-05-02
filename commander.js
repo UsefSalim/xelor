@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 const program = require('commander');
+const shell = require('shelljs');
 const { createCrud } = require('./utilities/generator/server/crud');
 const { creatAuth } = require('./utilities/generator/server/auth');
 const { mern, mernAuth, server } = require('./utilities/generator/config');
@@ -52,6 +53,7 @@ program
       insertFiles(staticFiles, 'Multer', 'middlewares');
     }
     if (options.redux) {
+      shell.exec('pnpm i @reduxjs/toolkit react-redux redux-saga');
       reduxConfig(Model);
     }
   });
