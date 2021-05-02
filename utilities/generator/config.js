@@ -14,27 +14,27 @@ exports.mern = (ProjectName) => {
     shell.exec('rm -r ./-Xelor-/.git');
     shell.exec(`mv ./-Xelor-/ ${path}/${ProjectName}`);
     terminal(success('Files created succesfuly ✌✌'));
-    fs.readFile(
-      `${path}/${ProjectName}/server/package.json`,
-      'utf-8',
-      (err, data) => {
-        const jsonFile = JSON.parse(data);
-        if (!err) {
-          jsonFile.name = ProjectName;
-        }
-        fs.writeFile(
-          `${path}/${ProjectName}/server/package.json`,
-          JSON.stringify(jsonFile),
-          (err) => {
-            err && terminal('err', err);
-          }
-        );
-      }
-    );
+    // fs.readFile(
+    //   `${path}/${ProjectName}/server/package.json`,
+    //   'utf-8',
+    //   (err, data) => {
+    //     const jsonFile = JSON.parse(data);
+    //     if (!err) {
+    //       jsonFile.name = ProjectName;
+    //     }
+    //     fs.writeFile(
+    //       `${path}/${ProjectName}/server/package.json`,
+    //       JSON.stringify(jsonFile),
+    //       (err) => {
+    //         err && terminal('err', err);
+    //       }
+    //     );
+    //   }
+    // );
     terminal(run('Install Dependencies ... 🕒🕒'));
     shell.exec(`npm i -g pnpm `);
-    shell.exec(`cd ./${ProjectName}/server && pnpm i`);
-    shell.exec(`cd ./${ProjectName}/client && pnpm i`);
+    shell.exec(`cd ./${ProjectName}/server && pnpm i && pnpm up`);
+    shell.exec(`cd ./${ProjectName}/client && pnpm i && pnpm up`);
     shell.exec(`cd ./${ProjectName} && code .`);
     shell.exec(`cd ./${ProjectName}/server && pnpm run dev`);
   } catch (error) {
@@ -46,29 +46,29 @@ exports.mernAuth = (ProjectName) => {
     shell.exec('git clone https://github.com/UsefSalim/-XelorAuth-.git');
     shell.exec('rm -r ./-XelorAuth-/.git');
     shell.exec(`mv ./-XelorAuth-/ ${path}/${ProjectName}`);
-    fs.readFile(
-      `${path}/${ProjectName}/server/package.json`,
-      'utf-8',
-      (err, data) => {
-        const jsonFile = JSON.parse(data);
-        if (!err) {
-          jsonFile.name = ProjectName;
-        }
-        fs.writeFile(
-          `${path}/${ProjectName}/server/package.json`,
-          JSON.stringify(jsonFile),
-          (err) => {
-            err && terminal('err', err);
-          }
-        );
-      }
-    );
+    // fs.readFile(
+    //   `${path}/${ProjectName}/server/package.json`,
+    //   'utf-8',
+    //   (err, data) => {
+    //     const jsonFile = JSON.parse(data);
+    //     if (!err) {
+    //       jsonFile.name = ProjectName;
+    //     }
+    //     fs.writeFile(
+    //       `${path}/${ProjectName}/server/package.json`,
+    //       JSON.stringify(jsonFile),
+    //       (err) => {
+    //         err && terminal('err', err);
+    //       }
+    //     );
+    //   }
+    // );
     terminal(success('Files created succesfuly ✌✌'));
     terminal(run('Install Dependencies ... 🕒🕒'));
 
     shell.exec(`npm i -g pnpm `);
-    shell.exec(`cd ./${ProjectName}/server && pnpm i`);
-    shell.exec(`cd ./${ProjectName}/client && pnpm i`);
+    shell.exec(`cd ./${ProjectName}/server && pnpm i  && pnpm up`);
+    shell.exec(`cd ./${ProjectName}/client && pnpm i  && pnpm up`);
     shell.exec(`cd ./${ProjectName} && code .`);
     shell.exec(`cd ./${ProjectName}/server && pnpm run dev`);
   } catch (error) {
@@ -96,7 +96,7 @@ exports.server = (ProjectName) => {
     terminal(success('Files created succesfuly ✌✌'));
     terminal(run('Install Dependencies ... 🕒🕒'));
     shell.exec(`npm i -g pnpm `);
-    shell.exec(`cd ./${ProjectName}  && pnpm i`);
+    shell.exec(`cd ./${ProjectName}  && pnpm i  && pnpm up`);
     shell.exec(`cd ./${ProjectName}  && code .`);
     shell.exec(`cd ./${ProjectName} && pnpm run dev`);
   } catch (error) {
