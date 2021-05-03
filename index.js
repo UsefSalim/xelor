@@ -23,6 +23,7 @@ exports.ifExist = async (Model, finder, populate = null, select = null) =>
  * @param {String} select
  * @param {String} sort
  * @param {Number} limit
+ * @param {Object} finder
  * @returns
  */
 exports.getAll = async (
@@ -31,13 +32,23 @@ exports.getAll = async (
   populate = null,
   select = null,
   sort = null,
-  limit = null
+  limit = null,
+  finder = null
 ) => {
-  const all = await Model.find()
-    .populate(populate)
-    .select(select)
-    .sort(sort)
-    .limit(limit);
+  let all;
+  if (finder) {
+    all = await Model.find(finder)
+      .populate(populate)
+      .select(select)
+      .sort(sort)
+      .limit(limit);
+  } else {
+    all = await Model.find()
+      .populate(populate)
+      .select(select)
+      .sort(sort)
+      .limit(limit);
+  }
   if (all) return res.status(200).json(all);
 };
 
