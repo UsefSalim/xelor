@@ -4,8 +4,8 @@ import {
   requestAddModelNames,
   requestDeleteModelNames,
   requestUpdateModelNames,
-} from '../requests/ModelNames';
-import { getModelName, allModelNames } from '../../slices/ModelNames.slice';
+} from '../requests/ModelName.request';
+import { getModelName, allModelNames } from '../../slices/ModelName.slice';
 
 export function* handelGetModelName(action) {
   try {

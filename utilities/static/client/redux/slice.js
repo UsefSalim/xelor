@@ -11,10 +11,10 @@ const ModelNamesSlice = createSlice({
         ModelName,
       };
     },
-    allModelNames: () => state,
-    addModelName: () => state,
-    deleteModelName: () => state,
-    updateModelName: () => state,
+    allModelNames: () => {},
+    addModelName: () => {},
+    deleteModelName: () => {},
+    updateModelName: () => {},
   },
 });
 export const {

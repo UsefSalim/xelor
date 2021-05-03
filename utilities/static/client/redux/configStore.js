@@ -5,7 +5,7 @@ import {
 } from '@reduxjs/toolkit';
 import createSagaMiddleware from 'redux-saga';
 import { watcherSaga } from './sagas/rootSaga';
-import ModelNamesSlice from './slices/ModelNames.slice';
+import ModelNameSlice from './slices/ModelName.slice';
 
 // create a saga middleware
 const sagaMiddleware = createSagaMiddleware();
@@ -13,7 +13,7 @@ const sagaMiddleware = createSagaMiddleware();
 const middleware = [sagaMiddleware];
 
 const reducer = combineReducers({
-  ModelNames: ModelNamesSlice,
+  ModelNames: ModelNameSlice,
 });
 
 export default configureStore({

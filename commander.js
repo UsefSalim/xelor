@@ -54,7 +54,7 @@ program
     }
     if (options.redux) {
       shell.exec(
-        'pnpm i @reduxjs/toolkit react-redux redux-saga --prefix ../client'
+        'cd ../client  && pnpm i @reduxjs/toolkit react-redux axios redux-saga'
       );
       reduxConfig(Model);
     }
