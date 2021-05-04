@@ -48,12 +48,13 @@ program
   .description('Server ->  add a crud with Joi validations to the server')
   .action((ModelName) => {
     const Model = ModelName.charAt(0).toUpperCase() + ModelName.slice(1);
+    createCrud(Model);
     if (options.image) {
       insertFiles(staticFiles, 'Multer', 'middlewares');
-    } else if (options.redux) {
+      console.log('image');
+    }
+    if (options.redux) {
       reduxConfig(Model);
-    } else {
-      createCrud(Model);
     }
   });
 

@@ -29,22 +29,23 @@ const creationFiles = (staticFiles, Model, type) => {
   });
 };
 exports.insertFiles = (staticFiles, Name, type) => {
+  // console.log('test oplala');
   if (fs.existsSync('./server')) {
-    shell.exec(`cd server && xelor c ${Name} -i`);
-  } else if (fs.existsSync('package.json')) {
-    if (!fs.existsSync(`./src/${type}`)) {
-      fs.mkdir(`${path}/src/${type}`, (err) => {
+    if (!fs.existsSync(`./server/src/${type}`)) {
+      fs.mkdir(`${path}/server/src/${type}`, (err) => {
         if (err) throw err;
       });
-      creationFiles(staticFiles, Name, `${type}`);
+      creationFiles(staticFiles, Name, `/server/${type}`);
     } else {
-      creationFiles(staticFiles, Name, `${type}`);
+      creationFiles(staticFiles, Name, `/server/${type}`);
     }
+  } else if (!fs.existsSync(`./src/${type}`)) {
+    fs.mkdir(`${path}/src/${type}`, (err) => {
+      if (err) throw err;
+    });
+    creationFiles(staticFiles, Name, `${type}`);
   } else {
-    terminal(
-      danger('make sure to configure your server before using crud ⇛'),
-      run('xelor s')
-    );
+    creationFiles(staticFiles, Name, `${type}`);
   }
 };
 
