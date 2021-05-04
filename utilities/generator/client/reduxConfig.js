@@ -1,5 +1,6 @@
 const fs = require('fs');
 const chalk = require('chalk');
+const shell = require('shelljs');
 
 const sucess = chalk.bold.green;
 const danger = chalk.bold.red;
@@ -8,25 +9,30 @@ const { log: terminal } = console;
 const path = process.cwd();
 const staticFiles = `${__dirname}/../../static/client/redux`;
 exports.reduxConfig = (Model) => {
+  if (!fs.existsSync('../client/src'))
+    terminal(danger('veiller lancer la commande depuit le server'));
   if (!fs.existsSync(`../client/src/redux`)) {
     fs.mkdir(`${path}/../client/src/redux`, (err) => {
-      if (err) console.log('veiller lancer la commande depuit le server');
+      if (err) throw err;
     });
+    shell.exec(
+      'cd ../client  && pnpm i @reduxjs/toolkit react-redux axios redux-saga'
+    );
   }
   if (!fs.existsSync(`../client/src/redux/slices`)) {
     fs.mkdir(`${path}/../client/src/redux/slices`, (err) => {
-      if (err) console.log('veiller lancer la commande depuit le server');
+      if (err) throw err;
     });
   }
   if (!fs.existsSync(`../client/src/redux/sagas`)) {
     fs.mkdir(`${path}/../client/src/redux/sagas`, (err) => {
-      if (err) console.log('veiller lancer la commande depuit le server');
+      if (err) throw err;
     });
     fs.mkdir(`${path}/../client/src/redux/sagas/handlers`, (err) => {
-      if (err) console.log('veiller lancer la commande depuit le server');
+      if (err) throw err;
     });
     fs.mkdir(`${path}/../client/src/redux/sagas/requests`, (err) => {
-      if (err) console.log('veiller lancer la commande depuit le server');
+      if (err) throw err;
     });
   }
   if (!fs.existsSync(`../client/src/redux/ConfigStore.js`)) {

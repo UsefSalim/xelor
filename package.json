@@ -1,6 +1,6 @@
 {
   "name": "xelor",
-  "version": "1.6.7",
+  "version": "1.6.8",
   "description": "",
   "main": "index.js",
   "preferGlobal": true,
