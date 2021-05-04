@@ -1,5 +1,6 @@
 const fs = require('fs');
 const chalk = require('chalk');
+const shell = require('shelljs');
 
 const success = chalk.bold.green;
 const run = chalk.bold.blue;
@@ -42,6 +43,7 @@ exports.insertFiles = (staticFiles, Name, type) => {
 // };
 
 exports.createCrud = (Name) => {
+  if (fs.existsSync('./server')) shell.exec('cd server');
   this.insertFiles(staticFiles, Name, 'controllers');
   this.insertFiles(staticFiles, Name, 'models');
   this.insertFiles(staticFiles, Name, 'routes');

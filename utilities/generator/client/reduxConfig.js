@@ -49,7 +49,7 @@ exports.reduxConfig = (Model) => {
       );
     });
   }
-  if (!fs.existsSync(`../client/src/redux/sagas/rootSage.js`)) {
+  if (!fs.existsSync(`../client/src/redux/sagas/rootSaga.js`)) {
     fs.readFile(`${staticFiles}/rootSaga.js`, 'utf8', (err, data) => {
       if (err) throw err;
       const result = data.replace(/ModelName/g, Model);
