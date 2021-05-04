@@ -9,8 +9,8 @@ const { log: terminal } = console;
 const path = process.cwd();
 const staticFiles = `${__dirname}/../../static/client/redux`;
 exports.reduxConfig = (Model) => {
-  if (!fs.existsSync('../client/src'))
-    terminal(danger('veiller lancer la commande depuit le server'));
+  // if (!fs.existsSync('../client/src'))
+  //   terminal(danger('veiller lancer la commande depuit le server'));
   if (!fs.existsSync(`../client/src/redux`)) {
     fs.mkdir(`${path}/../client/src/redux`, (err) => {
       if (err) throw err;

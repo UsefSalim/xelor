@@ -36,6 +36,7 @@ const insertFiles = (staticFiles, type, Model = 'auth') => {
   }
 };
 exports.creatAuth = () => {
+  if (fs.existsSync('./server')) shell.exec('cd server');
   if (fs.existsSync('package.json')) {
     insertFiles(staticFiles, 'controllers');
     insertFiles(staticFiles, 'middlewares');
@@ -48,7 +49,7 @@ exports.creatAuth = () => {
       danger(
         'make sure to configure your server before using authentication ⇛'
       ),
-      run('xelor server')
+      run('xelor s')
     );
   }
 };

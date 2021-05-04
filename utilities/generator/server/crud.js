@@ -3,6 +3,7 @@ const chalk = require('chalk');
 const shell = require('shelljs');
 
 const success = chalk.bold.green;
+const danger = chalk.bold.red;
 const run = chalk.bold.blue;
 const { log: terminal } = console;
 const path = process.cwd();
@@ -44,9 +45,18 @@ exports.insertFiles = (staticFiles, Name, type) => {
 
 exports.createCrud = (Name) => {
   if (fs.existsSync('./server')) shell.exec('cd server');
-  this.insertFiles(staticFiles, Name, 'controllers');
-  this.insertFiles(staticFiles, Name, 'models');
-  this.insertFiles(staticFiles, Name, 'routes');
-  this.insertFiles(staticFiles, Name, 'validations');
-  terminal(success(`crud`), run(Name), success(`created successfully 👏👏`));
+  if (fs.existsSync('package.json')) {
+    this.insertFiles(staticFiles, Name, 'controllers');
+    this.insertFiles(staticFiles, Name, 'models');
+    this.insertFiles(staticFiles, Name, 'routes');
+    this.insertFiles(staticFiles, Name, 'validations');
+    terminal(success(`crud`), run(Name), success(`created successfully 👏👏`));
+  } else {
+    terminal(
+      danger(
+        'make sure to configure your server before using authentication ⇛'
+      ),
+      run('xelor s')
+    );
+  }
 };
