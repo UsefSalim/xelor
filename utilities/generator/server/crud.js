@@ -29,13 +29,22 @@ const creationFiles = (staticFiles, Model, type) => {
   });
 };
 exports.insertFiles = (staticFiles, Name, type) => {
-  if (!fs.existsSync(`./src/${type}`)) {
-    fs.mkdir(`${path}/src/${type}`, (err) => {
-      if (err) throw err;
-    });
-    creationFiles(staticFiles, Name, `${type}`);
+  if (fs.existsSync('./server')) {
+    shell.exec(`cd server && xelor c ${Name} -i`);
+  } else if (fs.existsSync('package.json')) {
+    if (!fs.existsSync(`./src/${type}`)) {
+      fs.mkdir(`${path}/src/${type}`, (err) => {
+        if (err) throw err;
+      });
+      creationFiles(staticFiles, Name, `${type}`);
+    } else {
+      creationFiles(staticFiles, Name, `${type}`);
+    }
   } else {
-    creationFiles(staticFiles, Name, `${type}`);
+    terminal(
+      danger('make sure to configure your server before using crud ⇛'),
+      run('xelor s')
+    );
   }
 };
 
@@ -44,8 +53,9 @@ exports.insertFiles = (staticFiles, Name, type) => {
 // };
 
 exports.createCrud = (Name) => {
-  if (fs.existsSync('./server')) shell.exec('cd server');
-  if (fs.existsSync('package.json')) {
+  if (fs.existsSync('./server')) {
+    shell.exec(`cd server && xelor c ${Name}`);
+  } else if (fs.existsSync('package.json')) {
     this.insertFiles(staticFiles, Name, 'controllers');
     this.insertFiles(staticFiles, Name, 'models');
     this.insertFiles(staticFiles, Name, 'routes');
@@ -53,9 +63,7 @@ exports.createCrud = (Name) => {
     terminal(success(`crud`), run(Name), success(`created successfully 👏👏`));
   } else {
     terminal(
-      danger(
-        'make sure to configure your server before using authentication ⇛'
-      ),
+      danger('make sure to configure your server before using crud ⇛'),
       run('xelor s')
     );
   }
