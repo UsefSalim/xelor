@@ -29,11 +29,15 @@ const creationFiles = (staticFiles, Model, type) => {
   });
 };
 exports.insertFiles = (staticFiles, Name, type) => {
-  if (fs.existsSync('./server') && !fs.existsSync(`./server/src/${type}`)) {
-    fs.mkdir(`${path}/server/src/${type}`, (err) => {
-      if (err) throw err;
-    });
-    creationFiles(staticFiles, Name, `${type}`);
+  if (fs.existsSync('./server')) {
+    if (!fs.existsSync(`./server/src/${type}`)) {
+      fs.mkdir(`${path}/server/src/${type}`, (err) => {
+        if (err) throw err;
+      });
+      creationFiles(staticFiles, Name, `/server/${type}`);
+    } else {
+      creationFiles(staticFiles, Name, `/server/${type}`);
+    }
   } else if (!fs.existsSync(`./src/${type}`)) {
     fs.mkdir(`${path}/src/${type}`, (err) => {
       if (err) throw err;
@@ -56,6 +60,7 @@ exports.createCrud = (Name) => {
     this.insertFiles(staticFiles, Name, 'models');
     this.insertFiles(staticFiles, Name, 'routes');
     this.insertFiles(staticFiles, Name, 'validations');
+    // console.log(__dirname);
     terminal(success(`crud`), run(Name), success(`created successfully 👏👏`));
   } else {
     terminal(

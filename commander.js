@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 const program = require('commander');
-const shell = require('shelljs');
+const fs = require('fs');
 const { createCrud } = require('./utilities/generator/server/crud');
 const { creatAuth } = require('./utilities/generator/server/auth');
 const { mern, mernAuth, server } = require('./utilities/generator/config');
@@ -9,6 +9,7 @@ const { reduxConfig } = require('./utilities/generator/client/reduxConfig');
 const staticFiles = `${__dirname}/utilities/static/server/api/crud`;
 const { insertFiles } = require('./utilities/generator/server/crud');
 
+let pathfile;
 program.version('1.0.0').description('mern generator');
 
 program.option('-i, --image', 'crud model with image');
@@ -50,8 +51,10 @@ program
     const Model = ModelName.charAt(0).toUpperCase() + ModelName.slice(1);
     createCrud(Model);
     if (options.image) {
-      insertFiles(staticFiles, 'Multer', 'middlewares');
-      console.log('image');
+      fs.existsSync('./server')
+        ? (pathfile = `./server/${staticFiles}`)
+        : staticFiles;
+      insertFiles(pathfile, 'Multer', 'middlewares');
     }
     if (options.redux) {
       reduxConfig(Model);
