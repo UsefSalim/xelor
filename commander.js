@@ -10,7 +10,7 @@ const staticFiles = `${__dirname}/utilities/static/server/api/crud`;
 const { insertFiles } = require('./utilities/generator/server/crud');
 
 let pathfile;
-program.version('1.0.0').description('mern generator');
+program.version('1.6.15').description('xelor  generator');
 
 program.option('-i, --image', 'crud model with image');
 program.option('-rx, --redux', 'functions crud redu');

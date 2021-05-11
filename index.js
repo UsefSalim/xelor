@@ -29,18 +29,18 @@ exports.ifExist = async (Model, finder, populate = null, select = null) =>
 exports.getAll = async (
   res,
   Model,
-  finder = null
+  finder = null,
   populate = null,
   data = null,
   select = null,
   sort = null,
-  limit = null,
+  limit = null
 ) => {
   const all = await Model.find(finder || {})
-      .populate(populate)
-      .select(select)
-      .sort(sort)
-      .limit(limit);
+    .populate(populate)
+    .select(select)
+    .sort(sort)
+    .limit(limit);
   if (all && data) return all;
   if (all) res.status(200).json(all);
 };
@@ -55,11 +55,18 @@ exports.getAll = async (
  * @param {String} select
  * @returns
  */
-exports.getOne = async (res, Model, finder, populate = null, data = null,select = null) => {
+exports.getOne = async (
+  res,
+  Model,
+  finder,
+  populate = null,
+  data = null,
+  select = null
+) => {
   if (finder._id && !ObjectID.isValid(finder._id))
     return res.status(400).json({ message: `l'ID ${finder} n'est pas valide` });
   const single = await this.ifExist(Model, finder, populate, select);
-  if (single && data) single ;
+  if (single && data) return single;
   if (single) return res.status(200).json(single);
 };
 
